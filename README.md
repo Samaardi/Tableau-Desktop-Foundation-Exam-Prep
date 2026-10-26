@@ -3,6 +3,8 @@
 Flashcards for preparing for the **Salesforce Certified Tableau Desktop Foundations** exam (formerly Tableau Desktop Specialist).
  
 ## 👉 [Open the flashcards](https://samaardi.github.io/Tableau-Desktop-Foundation-Exam-Prep/)
+
+## 📊 [Tableau Reference Tables](Tableau-Reference-Tables.md)
  
 ## What's inside
  
