@@ -1,672 +1,915 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="384 flashcards for the Salesforce Certified Tableau Desktop Foundations exam: every objective in the official exam guide, from connecting to data to dashboards, plus exam-style practice questions.">
 <title>Tableau Desktop Foundations Flashcards</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231E4F7A'/%3E%3Crect x='7' y='16' width='4' height='9' rx='1' fill='%23fff' opacity='.6'/%3E%3Crect x='14' y='8' width='4' height='17' rx='1' fill='%23fff'/%3E%3Crect x='21' y='12' width='4' height='13' rx='1' fill='%23fff' opacity='.8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one study card centred under a filter bar; decks are grouped and coloured by exam domain. */
+/* Layout: a worksheet-like page. Header = title + a bullet graph of progress per exam domain,
+   with the 48% pass mark as a reference line. Below: deck list (like the Data pane) + the card (the view). */
 :root {
-  --bg: #F2F4F7;
+  --bg: #F6F6F3;
   --surface: #FFFFFF;
-  --surface-2: #E8ECF1;
-  --ink: #16202B;
-  --muted: #586574;
-  --line: #D6DDE5;
-  --accent: #2F5D8A;
-  --good: #2F7A55;
-  --again: #B4492A;
-  --c-d0: #5A6676;
-  --c-d1: #2F5D8A;
-  --c-d2: #2F7A55;
-  --c-d3: #B4492A;
-  --c-d4: #6E4FA3;
-  --shadow: 0 1px 2px rgba(22,32,43,.06), 0 8px 24px rgba(22,32,43,.08);
-  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --surface-2: #EEEFEB;
+  --ink: #1C222A;
+  --muted: #5D6670;
+  --line: #DFE1DC;
+  --accent: #2F5F8F;
+  --good: #3D8B4E;
+  --again: #C2453F;
+  --d0: #5E6976; --d1: #3A6A9A; --d2: #B9611A; --d3: #2D7D76; --d4: #85578A; --d5: #B13E48;
+  --pass: #1C222A;
+  --c-exam: var(--d0); --c-ui: var(--d0); --c-conn: var(--d1); --c-prep: var(--d1); --c-model: var(--d1); --c-props: var(--d1); --c-charts: var(--d2); --c-maps: var(--d2); --c-axes: var(--d2); --c-org: var(--d2); --c-filt: var(--d2); --c-dates: var(--d2); --c-sort: var(--d2); --c-ref: var(--d2); --c-tcalc: var(--d2); --c-bins: var(--d2); --c-calc: var(--d2); --c-param: var(--d2); --c-fmt: var(--d3); --c-dash: var(--d3); --c-act: var(--d3); --c-story: var(--d3); --c-share: var(--d3); --c-dimm: var(--d4); --c-disc: var(--d4); --c-agg: var(--d4); --c-mock: var(--d5);
+  --shadow: 0 1px 0 rgba(28,34,42,.04), 0 4px 14px rgba(28,34,42,.06);
+  --f-display: "Archivo", "Arial Narrow", "Segoe UI", system-ui, sans-serif;
+  --f-sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0F151C; --surface: #18212B; --surface-2: #212C38; --ink: #E6ECF2; --muted: #9AA8B6; --line: #2B3745;
-    --accent: #7FAEDD; --good: #6CC193; --again: #F08A68;
-    --c-d0: #A9B5C3; --c-d1: #7FAEDD; --c-d2: #6CC193; --c-d3: #F08A68; --c-d4: #B79BE6;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.35);
+    --bg: #14181D; --surface: #1C2229; --surface-2: #262D35; --ink: #E7EAEE; --muted: #9CA6B1; --line: #313942;
+    --accent: #8FB6DE; --good: #77C389; --again: #F08A80;
+    --d0: #A9B4C1; --d1: #8DB3DB; --d2: #F2A65A; --d3: #7CC6BF; --d4: #CDA0CF; --d5: #F0898F; --pass: #E7EAEE;
+    --shadow: 0 1px 0 rgba(0,0,0,.25), 0 8px 24px rgba(0,0,0,.35);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0F151C; --surface: #18212B; --surface-2: #212C38; --ink: #E6ECF2; --muted: #9AA8B6; --line: #2B3745;
-  --accent: #7FAEDD; --good: #6CC193; --again: #F08A68;
-  --c-d0: #A9B5C3; --c-d1: #7FAEDD; --c-d2: #6CC193; --c-d3: #F08A68; --c-d4: #B79BE6;
-  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.35);
+  --bg: #14181D; --surface: #1C2229; --surface-2: #262D35; --ink: #E7EAEE; --muted: #9CA6B1; --line: #313942;
+  --accent: #8FB6DE; --good: #77C389; --again: #F08A80;
+  --d0: #A9B4C1; --d1: #8DB3DB; --d2: #F2A65A; --d3: #7CC6BF; --d4: #CDA0CF; --d5: #F0898F; --pass: #E7EAEE;
+  --shadow: 0 1px 0 rgba(0,0,0,.25), 0 8px 24px rgba(0,0,0,.35);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16.5px/1.5 var(--f-sans); }
+[hidden] { display: none !important; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 .wrap {
-  max-width: 780px; margin: 0 auto;
-  padding-block: 28px 48px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  display: flex; flex-direction: column; gap: 20px;
+  max-width: 1140px; margin: 0 auto;
+  padding: 30px max(20px, env(safe-area-inset-right, 0px)) 40px max(20px, env(safe-area-inset-left, 0px));
 }
-header { display: flex; flex-direction: column; gap: 6px; }
-.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(28px, 5vw, 38px); line-height: 1.1; margin: 0; text-wrap: balance; }
-.lede { margin: 0; color: var(--muted); max-width: 62ch; }
 
-/* exam weights strip */
-.weights { display: flex; height: 30px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
-.weights span { display: flex; align-items: center; justify-content: center; font: 600 12px/1 var(--f-body); color: var(--bg); background: var(--c); white-space: nowrap; overflow: hidden; padding: 0 6px; font-variant-numeric: tabular-nums; }
-.weights-cap { font-size: 12px; color: var(--muted); margin-top: -12px; }
+/* ---------- header ---------- */
+.top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 500px); gap: 40px; align-items: end; padding-bottom: 26px; border-bottom: 2px solid var(--ink); }
+.spec { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
+.spec li { font: 500 12px var(--f-mono); color: var(--muted); border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 3px 8px; }
+.spec li b { color: var(--ink); font-weight: 500; }
+h1 { font-family: var(--f-display); font-stretch: 82%; font-weight: 750; font-size: clamp(36px, 5.4vw, 58px); line-height: .98; letter-spacing: -.01em; margin: 0 0 16px; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 52ch; font-size: 17.5px; }
+.lede strong { color: var(--ink); font-weight: 600; }
 
-/* filters */
-.filters { display: flex; flex-direction: column; gap: 10px; }
-.group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.rowlabel { font-size: 12px; color: var(--c, var(--muted)); letter-spacing: .06em; text-transform: uppercase; font-weight: 600; margin-right: 4px; min-width: 0; }
-.rowlabel b { font-variant-numeric: tabular-nums; }
-.chip {
-  font: 500 14px/1 var(--f-body); color: var(--ink);
-  background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
-  padding: 8px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
-}
-.chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
-.chip .n { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 12px; }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.chip[aria-pressed="true"] .n { color: inherit; opacity: .7; }
-.chip:focus-visible, .btn:focus-visible, .card:focus-visible, .seg button:focus-visible, .rowlabel:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-button.rowlabel { background: none; border: 0; padding: 4px 2px; cursor: pointer; font-family: var(--f-body); }
-button.rowlabel:hover { text-decoration: underline; }
+/* bullet graph */
+.chart { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px 12px; }
+.chart-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+.chart-title h2 { font: 700 13px var(--f-display); font-stretch: 90%; letter-spacing: .04em; text-transform: uppercase; margin: 0; }
+.chart-title span { font-size: 12.5px; color: var(--muted); }
+.brows { position: relative; display: grid; gap: 3px; }
+.brow { display: grid; grid-template-columns: 170px minmax(0, 1fr) 40px; align-items: center; gap: 10px; background: none; border: 0; padding: 4px 4px; border-radius: 4px; cursor: pointer; text-align: left; }
+.brow:hover, .brow:focus-visible { background: var(--surface-2); }
+.blab { font-size: 13.5px; line-height: 1.2; min-width: 0; }
+.blab small { display: block; font: 500 11px var(--f-mono); color: var(--muted); margin-top: 1px; }
+.track { position: relative; height: 18px; background: color-mix(in srgb, var(--c) 13%, var(--surface)); border-radius: 2px; }
+.track .k, .track .a { position: absolute; top: 4px; bottom: 4px; left: 0; }
+.track .k { background: var(--c); border-radius: 1px; }
+.track .a { background: repeating-linear-gradient(135deg, var(--again) 0 2px, transparent 2px 5px); opacity: .8; }
+.bpct { font: 500 12.5px var(--f-mono); text-align: right; font-variant-numeric: tabular-nums; }
+.passline { position: absolute; top: -4px; bottom: -4px; width: 0; border-left: 1.5px dashed var(--pass); pointer-events: none; }
+.passlab { position: absolute; top: -20px; transform: translateX(-50%); font: 500 11px var(--f-mono); white-space: nowrap; }
+.chart figcaption { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12.5px; color: var(--muted); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+.chart figcaption span { display: inline-flex; align-items: center; gap: 6px; }
+.lg { width: 14px; height: 8px; display: inline-block; border-radius: 1px; }
+.lg.k { background: var(--d1); }
+.lg.a { background: repeating-linear-gradient(135deg, var(--again) 0 2px, transparent 2px 5px); }
+.lg.u { background: color-mix(in srgb, var(--d1) 13%, var(--surface)); border: 1px solid var(--line); }
+.lg.p { width: 0; height: 12px; border-left: 1.5px dashed var(--pass); border-radius: 0; }
 
-.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
-.seg button { font: 500 14px/1 var(--f-body); color: var(--muted); background: none; border: 0; padding: 9px 14px; cursor: pointer; }
-.seg button[aria-pressed="true"] { background: var(--surface-2); color: var(--ink); }
-.tools { display: flex; flex-wrap: wrap; gap: 8px; }
-.btn {
-  font: 500 14px/1 var(--f-body); color: var(--ink); background: var(--surface);
-  border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 6px;
-}
-.btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
-.btn:disabled { opacity: .45; cursor: default; }
+/* ---------- layout ---------- */
+.layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 36px; padding-top: 26px; align-items: start; }
 
-/* progress */
-.progress { display: flex; flex-direction: column; gap: 6px; }
-.progress .meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; gap: 12px; flex-wrap: wrap; }
-.bar { height: 6px; background: var(--surface-2); border-radius: 99px; overflow: hidden; display: flex; }
-.bar span { display: block; height: 100%; transition: width .3s ease; }
-.bar .k { background: var(--good); }
-.bar .a { background: var(--again); }
+/* deck sidebar, styled like the Data pane */
+.decks { position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.decks-body { padding: 12px 10px 14px; }
+.decks-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 6px 8px; border-bottom: 1px solid var(--line); }
+.decks-head h2 { font: 700 13px var(--f-display); font-stretch: 90%; letter-spacing: .04em; text-transform: uppercase; margin: 0; }
+.linkbtn { background: none; border: 0; padding: 2px 0; color: var(--accent); cursor: pointer; font-size: 13.5px; }
+.linkbtn:hover { text-decoration: underline; }
+.linkbtn + .linkbtn { margin-left: 12px; }
+.group { margin-top: 12px; }
+.group h3 { font: 600 12.5px var(--f-sans); color: var(--muted); margin: 0 0 2px; padding: 0 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.gname { background: none; border: 0; padding: 0; cursor: pointer; text-align: left; font: inherit; color: inherit; }
+.gname:hover { color: var(--accent); text-decoration: underline; }
+.gw { font: 500 11.5px var(--f-mono); font-variant-numeric: tabular-nums; flex: none; color: var(--ink); background: var(--surface-2); border-radius: 3px; padding: 0 5px; }
+.row { display: flex; align-items: center; gap: 2px; border-radius: 4px; }
+.row:hover { background: var(--surface-2); }
+.toggle { flex: 1; min-width: 0; display: flex; align-items: center; gap: 9px; background: none; border: 0; padding: 5px 6px; cursor: pointer; text-align: left; border-radius: 4px; }
+.box { width: 15px; height: 15px; border-radius: 3px; border: 1.5px solid var(--c); flex: none; display: grid; place-items: center; }
+.toggle[aria-pressed="true"] .box { background: var(--c); }
+.box svg { width: 11px; height: 11px; opacity: 0; }
+.toggle[aria-pressed="true"] .box svg { opacity: 1; }
+.dname { flex: 1; min-width: 0; font-size: 14.5px; }
+.toggle[aria-pressed="false"] .dname { color: var(--muted); }
+.dcount { font: 400 11.5px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.only { display: none; background: none; border: 0; color: var(--accent); font-size: 12.5px; padding: 5px 6px; cursor: pointer; border-radius: 4px; }
+.row:hover .only, .row:focus-within .only { display: inline-block; }
+@media (hover: none) { .only { display: inline-block; } }
+.decks-note { font-size: 12.5px; color: var(--muted); margin: 14px 6px 0; }
 
-/* card */
-.stage { perspective: 1400px; }
-.card { display: grid; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform .5s cubic-bezier(.2,.7,.2,1); border-radius: 18px; outline: none; }
+/* main */
+.bar-top { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.seg { display: inline-flex; border-bottom: 1px solid var(--line); gap: 2px; }
+.seg button { background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 7px 14px; cursor: pointer; font-size: 14.5px; color: var(--muted); }
+.seg button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { background: var(--surface); border: 1px solid var(--line); border-radius: 5px; padding: 7px 12px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+.btn:hover:not(:disabled) { border-color: color-mix(in srgb, var(--ink) 35%, var(--line)); }
+.btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.btn:disabled { opacity: .4; cursor: default; }
+
+.status { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font: 400 12.5px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+.status b { font-weight: 500; color: var(--ink); }
+.meter { height: 6px; background: var(--surface-2); border-radius: 1px; overflow: hidden; display: flex; margin-bottom: 18px; }
+.meter span { height: 100%; transition: width .3s ease; }
+.meter .k { background: var(--good); }
+.meter .a { background: repeating-linear-gradient(135deg, var(--again) 0 2px, transparent 2px 5px); }
+
+/* the card: a worksheet with a sheet tab */
+.stage { perspective: 1600px; }
+.card { display: grid; cursor: pointer; transform-style: preserve-3d; transition: transform .45s cubic-bezier(.2,.7,.2,1); border-radius: 6px; }
 .card.flipped { transform: rotateY(180deg); }
+.card:focus-visible { outline-offset: 4px; }
 .face {
   grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow);
-  min-height: 330px; padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 16px;
-  border-top: 5px solid var(--c); min-width: 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--shadow);
+  min-height: 340px; padding: 0 30px 24px; display: flex; flex-direction: column; gap: 18px;
+  position: relative; overflow: hidden;
+  background-image: linear-gradient(var(--surface), var(--surface)), linear-gradient(90deg, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px);
+  background-size: 100% 100%, 0 0;
 }
 .face.back { transform: rotateY(180deg); }
-.facehead { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; font-weight: 600; }
-.facehead .deck { display: inline-flex; align-items: center; gap: 8px; color: var(--c); }
-.facehead .deck::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
-.facehead .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
-.q { font-family: var(--f-display); font-weight: 500; font-size: clamp(21px, 4vw, 27px); line-height: 1.25; margin: auto 0; text-wrap: balance; min-width: 0; overflow-wrap: anywhere; }
-.a { font-size: 17px; line-height: 1.6; margin: auto 0; min-width: 0; overflow-wrap: anywhere; }
-.a p { margin: 0 0 10px; }
-.a p:last-child { margin-bottom: 0; }
-.a ul { margin: 0 0 10px; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
-.a ul:last-child { margin-bottom: 0; }
+.fhead { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); margin: 0 -30px; padding: 0 30px; border-bottom: 1px solid var(--line); background: var(--surface-2); min-height: 40px; }
+.fhead > span:first-child { display: inline-flex; align-items: center; gap: 0; align-self: stretch; }
+.fhead .deck { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 600; background: var(--surface); align-self: stretch; padding: 0 14px; margin-left: -14px; border-top: 3px solid var(--c); border-right: 1px solid var(--line); }
+.fhead .deck::before { content: ""; width: 10px; height: 10px; background: var(--c); border-radius: 2px; flex: none; }
+.xs { color: var(--muted); font-weight: 400; padding-left: 12px; }
+.tag { font-size: 12px; padding: 1px 8px; border-radius: 3px; border: 1px solid currentColor; }
+.tag.k { color: var(--good); } .tag.a { color: var(--again); }
+.q { font-family: var(--f-display); font-stretch: 92%; font-weight: 600; font-size: clamp(22px, 3vw, 29px); line-height: 1.22; margin: auto 0; max-width: 36ch; text-wrap: pretty; }
+.q code { font-size: .78em; }
+.qsmall { font-family: var(--f-display); font-stretch: 92%; font-weight: 500; font-size: 16.5px; line-height: 1.35; color: var(--muted); max-width: 62ch; padding-top: 4px; }
+.qsmall code { font-size: .85em; }
+.ans { font-size: 17.5px; line-height: 1.6; margin: auto 0; max-width: 64ch; overflow-wrap: anywhere; }
+.ans p { margin: 0 0 10px; } .ans p:last-child { margin: 0; }
+.ans ul { margin: 0 0 10px; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+.ans ul:last-child { margin-bottom: 0; }
+.ans strong, .ia strong { font-weight: 600; }
 .hint { font-size: 13px; color: var(--muted); }
-.tag { display: inline-block; font: 600 11px/1 var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: var(--c); border: 1px solid var(--c); border-radius: 4px; padding: 3px 6px; align-self: flex-start; }
-code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2); padding: 1px 5px; border-radius: 5px; }
-.formula { font-family: var(--f-mono); font-size: .9em; display: block; background: var(--surface-2); padding: 8px 12px; border-radius: 8px; margin: 4px 0 10px; overflow-x: auto; white-space: pre; }
-.pill { font: 600 .82em/1 var(--f-mono); padding: 2px 8px; border-radius: 999px; color: #fff; white-space: nowrap; }
-.pill.blue { background: #4E79A7; } .pill.green { background: #3E8E5B; }
+code { font-family: var(--f-mono); font-size: .84em; background: var(--surface-2); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+.formula { display: block; font-family: var(--f-mono); font-size: 14.5px; background: var(--surface-2); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 0 4px 4px 0; overflow-x: auto; white-space: nowrap; }
 
-.controls { display: grid; grid-template-columns: auto 1fr 1fr auto; gap: 10px; align-items: stretch; }
-.controls .btn { justify-content: center; padding: 12px 14px; font-size: 15px; }
-.btn.again { color: var(--again); border-color: color-mix(in srgb, var(--again) 45%, var(--line)); }
-.btn.good { color: var(--good); border-color: color-mix(in srgb, var(--good) 45%, var(--line)); }
-.keys { font-size: 12px; color: var(--muted); text-align: center; margin: 12px 0 0; }
-.keys kbd { font-family: var(--f-mono); font-size: 11px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--surface); }
+.controls { display: grid; grid-template-columns: auto 1fr 1fr auto; gap: 10px; margin-top: 14px; }
+.controls .btn { justify-content: center; padding: 11px 16px; font-size: 15px; }
+.btn.again { color: var(--again); }
+.btn.good { color: var(--good); }
+.keys { font-size: 12.5px; color: var(--muted); margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+kbd { font-family: var(--f-mono); font-size: 11px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 3px; padding: 0 5px; background: var(--surface); color: var(--ink); }
 
-.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 18px; padding: 40px 24px; text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-.empty h2 { font-family: var(--f-display); margin: 0; font-size: 24px; }
-.empty p { margin: 0; color: var(--muted); }
+.empty { border: 1px dashed var(--line); border-radius: 6px; padding: 48px 24px; text-align: center; background: var(--surface); }
+.empty h2 { font-family: var(--f-display); font-stretch: 90%; font-weight: 700; font-size: 24px; margin: 0 0 8px; }
+.empty p { margin: 0 0 16px; color: var(--muted); }
 
-/* list view */
-.list { display: flex; flex-direction: column; gap: 10px; }
-.item { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 12px; padding: 14px 18px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.4fr); gap: 18px; }
-.item .iq { font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
-.item .ia { color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
-.item .ia p { margin: 0 0 6px; }
-.item .ia p:last-child { margin: 0; }
-.item .ia ul { margin: 0 0 6px; padding-left: 18px; }
-.item .state { font-size: 12px; color: var(--muted); grid-column: 1 / -1; display: flex; gap: 10px; flex-wrap: wrap; }
-.item .state b { font-weight: 600; }
-.item .state .k { color: var(--good); }
-.item .state .x { color: var(--again); }
+/* browse list: a text table */
+.list { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 8px 28px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.item:last-child { border-bottom: 0; }
+.iq { font-family: var(--f-display); font-stretch: 92%; font-size: 17px; line-height: 1.35; font-weight: 600; }
+.ia { font-size: 15.5px; line-height: 1.58; overflow-wrap: anywhere; }
+.ia p { margin: 0 0 6px; } .ia p:last-child { margin: 0; }
+.ia ul { margin: 0 0 6px; padding-left: 18px; } .ia ul:last-child { margin: 0; }
+.imeta { grid-column: 1; font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
+.imeta .deck { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-weight: 500; }
+.imeta .deck::before { content: ""; width: 9px; height: 9px; background: var(--c); border-radius: 2px; }
+.imeta .k { color: var(--good); } .imeta .x { color: var(--again); }
 
-footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 8px; }
-footer .row { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; }
-footer a { color: var(--accent); }
-footer button { font: inherit; color: var(--muted); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+footer { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; }
+footer p { margin: 0; max-width: 70ch; }
+footer .linkbtn { font-size: 13px; }
 
+/* pills look like Tableau field pills */
+.pill { font: 500 .78em var(--f-mono); padding: 2px 9px; border-radius: 99px; color: #fff; white-space: nowrap; }
+.pill.b { background: #3F78A8; } .pill.g { background: #2F8A5B; }
+.qwrap { margin: auto 0; display: flex; flex-direction: column; gap: 16px; }
+.qwrap .q { margin: 0; }
+.qopts { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-width: 60ch; }
+.qopts li { font-size: 16px; line-height: 1.4; padding: 7px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface-2); }
+.qsmall + .qopts { margin-top: 10px; }
+.qsmall + .qopts li, .iq .qopts li { font-size: 14px; padding: 4px 10px; font-family: var(--f-sans); font-weight: 400; }
+.iq .qopts { margin-top: 8px; }
+
+/* ---------- responsive ---------- */
+.decks-toggle { display: none; }
+@media (max-width: 880px) {
+  .top { grid-template-columns: 1fr; gap: 22px; }
+  .layout { grid-template-columns: 1fr; gap: 18px; }
+  .decks { position: static; }
+  .decks-toggle { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 12px; background: none; border: 0; padding: 13px 16px; cursor: pointer; text-align: left; border-radius: 6px; }
+  .decks-toggle .dt-sum { font-weight: 600; font-size: 15px; }
+  .decks-toggle .dt-act { color: var(--accent); font-size: 14px; font-weight: 500; }
+  .decks:not(.open) .decks-body { display: none; }
+  .decks-body { padding-top: 0; }
+  .decks-head h2 { display: none; }
+}
+@media (min-width: 881px) and (max-width: 1040px) {
+  .top { grid-template-columns: minmax(0, 1fr) 420px; }
+  .layout { grid-template-columns: 260px minmax(0, 1fr); gap: 26px; }
+  .brow { grid-template-columns: 120px minmax(0, 1fr) 38px; }
+  .dname { font-size: 14px; }
+}
 @media (max-width: 560px) {
-  .face { padding: 18px 18px 22px; min-height: 300px; }
+  .wrap { padding-top: 22px; }
+  .chart { padding: 14px 12px 10px; }
+  .brow { grid-template-columns: 104px minmax(0, 1fr) 36px; gap: 8px; }
+  .blab { font-size: 12.5px; }
+  .face { padding: 0 20px 22px; min-height: 300px; }
+  .fhead { margin: 0 -20px; padding: 0 20px; }
   .controls { grid-template-columns: 1fr 1fr; }
   .controls .prev { order: 3; } .controls .next { order: 4; }
-  .item { grid-template-columns: 1fr; gap: 8px; }
+  .item { grid-template-columns: 1fr; padding: 14px 16px; }
+  .imeta { grid-column: auto; }
   .keys { display: none; }
-  .weights span { font-size: 11px; padding: 0 3px; }
 }
-@media (prefers-reduced-motion: reduce) { .card, .bar span { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .card, .meter span { transition: none; }
+}
 </style>
-
+</head>
+<body>
 <div class="wrap">
-  <header>
-    <div class="eyebrow">Tableau · Exam preparation</div>
-    <h1>Tableau Desktop Foundations Flashcards</h1>
-    <p class="lede">Every objective in the official exam guide for the Salesforce Certified Tableau Desktop Foundations exam (formerly Tableau Desktop Specialist), plus the traps that show up in practice exams. Read the question, answer it in your head, then flip the card and be honest about whether you knew it.</p>
+  <header class="top">
+    <div>
+      <ul class="spec" aria-label="Exam facts">
+        <li>Analytics-101</li><li><b>40</b> questions</li><li><b>70</b> min</li><li>pass <b>48%</b></li><li>Tableau <b>2022.3</b></li>
+      </ul>
+      <h1>Tableau Desktop Foundations Flashcards</h1>
+      <p class="lede">Every objective in the official exam guide for the Salesforce Certified Tableau Desktop Foundations exam, in <strong>384 cards</strong>, including 67 exam-style questions. Useful as a quick refresher for anyone who works in Tableau Desktop.</p>
+    </div>
+    <figure class="chart" aria-label="Your progress by exam domain">
+      <div class="chart-title"><h2>Progress by exam domain</h2><span>% of cards known</span></div>
+      <div class="brows" id="chart"></div>
+      <figcaption><span><i class="lg k"></i>Known</span><span><i class="lg a"></i>Review again</span><span><i class="lg u"></i>Not seen yet</span><span><i class="lg p"></i>Pass mark 48%</span><span>Click a row to study that domain</span></figcaption>
+    </figure>
   </header>
 
-  <div class="weights" aria-label="Exam weighting by domain">
-    <span style="flex:25;--c:var(--c-d1)">D1 Data 25%</span>
-    <span style="flex:35;--c:var(--c-d2)">D2 Explore &amp; analyze 35%</span>
-    <span style="flex:25;--c:var(--c-d3)">D3 Share 25%</span>
-    <span style="flex:15;--c:var(--c-d4)">D4 Concepts 15%</span>
+  <div class="layout">
+    <aside class="decks" id="decksbox" aria-label="Decks">
+      <button class="decks-toggle" id="dtoggle" aria-expanded="false" aria-controls="decks-body"><span class="dt-sum" id="decksum">All decks</span><span class="dt-act" id="dtact">Choose decks</span></button>
+      <div class="decks-body" id="decks-body">
+        <div class="decks-head"><h2>Decks</h2><span><button class="linkbtn" id="all">Select all</button><button class="linkbtn" id="none">Clear</button></span></div>
+        <div id="groups"></div>
+        <p class="decks-note">Progress is saved in this browser only.</p>
+      </div>
+    </aside>
+
+    <section aria-label="Flashcards">
+      <div class="bar-top">
+        <div class="seg" role="group" aria-label="View">
+          <button id="v-study" aria-pressed="true">Study</button>
+          <button id="v-list" aria-pressed="false">Browse all</button>
+        </div>
+        <div class="opts">
+          <button class="btn" id="shuffle" aria-pressed="false">Shuffle</button>
+          <button class="btn" id="missed" aria-pressed="false">Review again only</button>
+        </div>
+      </div>
+      <div class="status"><span id="pcount"></span><span id="pstat"></span></div>
+      <div class="meter" aria-hidden="true"><span class="k" id="bk"></span><span class="a" id="ba"></span></div>
+      <main id="study"><div class="stage" id="stage"></div></main>
+      <main id="listview" hidden><div class="list" id="list"></div></main>
+    </section>
   </div>
-  <p class="weights-cap">Share of exam questions per domain. Study in the same proportion.</p>
-
-  <section class="filters" aria-label="Choose cards" id="decks"></section>
-
-  <div class="toolbar">
-    <div class="seg" role="group" aria-label="View">
-      <button id="v-study" aria-pressed="true">Study</button>
-      <button id="v-list" aria-pressed="false">All cards</button>
-    </div>
-    <div class="tools">
-      <button class="btn" id="shuffle" aria-pressed="false">Shuffle</button>
-      <button class="btn" id="missed" aria-pressed="false">Only “review again”</button>
-    </div>
-  </div>
-
-  <div class="progress">
-    <div class="meta"><span id="pcount"></span><span id="pstat"></span></div>
-    <div class="bar" aria-hidden="true"><span class="k" id="bk"></span><span class="a" id="ba"></span></div>
-  </div>
-
-  <main id="study"><div class="stage" id="stage"></div></main>
-  <main id="listview" hidden><div class="list" id="list"></div></main>
 
   <footer>
-    <div class="row">
-      <span>Your progress is saved in this browser only.</span>
-      <button id="reset">Reset my progress</button>
-    </div>
-    <div>Based on the official exam guide on <a href="https://trailheadacademy.salesforce.com/certificate/exam-tableau-desktop-found---Analytics-101" target="_blank" rel="noopener">Trailhead Academy</a> and Tableau’s Desktop Foundations training. Exam format details can change, so check the exam page before you book.</div>
+    <p>Checked against the Salesforce exam guide (Tableau 2022.3) and Tableau Desktop help. Not affiliated with or endorsed by Tableau or Salesforce.</p>
+    <button class="linkbtn" id="reset">Reset my progress</button>
   </footer>
 </div>
 
 <script>
-const DOMAINS = [
-  { n: 0, name: "Before the exam", weight: "" },
-  { n: 1, name: "Domain 1 · Connecting to & preparing data", weight: "25%" },
-  { n: 2, name: "Domain 2 · Exploring & analyzing data", weight: "35%" },
-  { n: 3, name: "Domain 3 · Sharing insights", weight: "25%" },
-  { n: 4, name: "Domain 4 · Understanding Tableau concepts", weight: "15%" },
+const GROUPS = [
+  {"name": "Getting started", "decks": ["exam", "ui"]},
+  {"name": "1 · Connecting to & preparing data", "weight": "23%", "decks": ["conn", "prep", "model", "props"]},
+  {"name": "2 · Exploring & analyzing data", "weight": "37%", "decks": ["charts", "maps", "axes", "org", "filt", "dates", "sort", "ref", "tcalc", "bins", "calc", "param"]},
+  {"name": "3 · Sharing insights", "weight": "25%", "decks": ["fmt", "dash", "act", "story", "share"]},
+  {"name": "4 · Understanding Tableau concepts", "weight": "15%", "decks": ["dimm", "disc", "agg"]},
+  {"name": "Practice", "decks": ["mock"]},
 ];
 const DECKS = [
-  { id: "exam",   d: 0, name: "Exam facts & strategy" },
-  { id: "conn",   d: 1, name: "1.1 Live connections & extracts" },
-  { id: "model",  d: 1, name: "1.2 Data model: relationships, joins, unions" },
-  { id: "props",  d: 1, name: "1.3 Data properties" },
-  { id: "charts", d: 2, name: "2.1 Basic charts" },
-  { id: "org",    d: 2, name: "2.2 Groups, sets & hierarchies" },
-  { id: "filt",   d: 2, name: "2.2 Filters" },
-  { id: "anal",   d: 2, name: "2.3 Sorting, analytics & table calcs" },
-  { id: "calc",   d: 2, name: "2.3 Calculations & parameters" },
-  { id: "fmt",    d: 3, name: "3.1 Formatting" },
-  { id: "dash",   d: 3, name: "3.2 Dashboards & stories" },
-  { id: "share",  d: 3, name: "3.3 Sharing & exporting" },
-  { id: "dimm",   d: 4, name: "4.1 Dimensions & measures" },
-  { id: "disc",   d: 4, name: "4.2 Discrete & continuous" },
-  { id: "agg",    d: 4, name: "4.3 Aggregation & order of operations" },
+  {"id": "exam", "name": "Exam format and strategy", "short": "Exam"},
+  {"id": "ui", "name": "Workspace and interface", "short": "Workspace"},
+  {"id": "conn", "name": "Live connections and extracts", "short": "Extracts"},
+  {"id": "prep", "name": "Cleaning and shaping data", "short": "Cleaning"},
+  {"id": "model", "name": "Relationships, joins and unions", "short": "Data model"},
+  {"id": "props", "name": "Field properties", "short": "Properties"},
+  {"id": "charts", "name": "Basic charts", "short": "Charts"},
+  {"id": "maps", "name": "Maps", "short": "Maps"},
+  {"id": "axes", "name": "Combined and dual axis", "short": "Axes"},
+  {"id": "org", "name": "Groups, sets and hierarchies", "short": "Groups/sets"},
+  {"id": "filt", "name": "Filters and order of operations", "short": "Filters"},
+  {"id": "dates", "name": "Dates and date filters", "short": "Dates"},
+  {"id": "sort", "name": "Sorting and totals", "short": "Sorting"},
+  {"id": "ref", "name": "Reference lines and analytics", "short": "Analytics"},
+  {"id": "tcalc", "name": "Quick table calculations", "short": "Table calcs"},
+  {"id": "bins", "name": "Bins and histograms", "short": "Bins"},
+  {"id": "calc", "name": "Calculated fields", "short": "Calc fields"},
+  {"id": "param", "name": "Parameters", "short": "Parameters"},
+  {"id": "fmt", "name": "Formatting", "short": "Formatting"},
+  {"id": "dash", "name": "Dashboards and layout", "short": "Dashboards"},
+  {"id": "act", "name": "Actions and interactivity", "short": "Actions"},
+  {"id": "story", "name": "Stories", "short": "Stories"},
+  {"id": "share", "name": "Sharing and exporting", "short": "Sharing"},
+  {"id": "dimm", "name": "Dimensions and measures", "short": "Dimensions"},
+  {"id": "disc", "name": "Discrete and continuous", "short": "Discrete"},
+  {"id": "agg", "name": "Aggregation and level of detail", "short": "Aggregation"},
+  {"id": "mock", "name": "Practice exam questions", "short": "Practice"},
 ];
 
-// q = question, a = answer. Inline markup: `code`, **bold**, *italic*, [[blue]] / {{green}} = pills,
-// blank line = new paragraph, "- " lines = list, a line that is only `code` = formula block.
-// Questions that start with "Exam-style:" mimic the multiple-choice scenarios in practice exams.
-const RAW = [
-  // ======== EXAM FACTS ========
-  ["exam", "What is the exam called now, and what was its old name?", "**Salesforce Certified Tableau Desktop Foundations** (exam code Analytics-101).\n\nUntil Tableau certifications moved to Salesforce’s Trailhead Academy it was called **Tableau Desktop Specialist**. The topics did not change with the rename, so older “Desktop Specialist” study material still applies."],
-  ["exam", "What is the exam format?", "- 40 scored questions, plus a few unscored trial questions\n- Multiple choice and multiple response (“select 2”, “select 3”)\n- 70 minutes\n- Passing score: 48%\n- Registration fee: 75 USD\n- Online proctored or at a test centre\n\nCheck the Trailhead Academy exam page before booking; Salesforce can change these details."],
-  ["exam", "Will you have Tableau Desktop open during the exam?", "**No.** It is closed-book and knowledge-based. You can’t click around to find an answer, so you must know where things are: which menu, which pane, which right-click option."],
-  ["exam", "What are the four domains and their weights?", "- **D1** Connecting to & preparing data: **25%**\n- **D2** Exploring & analyzing data: **35%**\n- **D3** Sharing insights: **25%**\n- **D4** Understanding Tableau concepts: **15%**\n\nD2 is the biggest: about 14 of 40 questions."],
-  ["exam", "How much time do you have per question?", "About **100 seconds** (70 min ÷ ~42 questions). Answer what you know, flag the rest, and come back. There is no penalty for a wrong answer, so never leave a question blank."],
-  ["exam", "What should you look for when reading a multiple-response question?", "The number to select (“Choose 2”). You only get the point if **all** your choices are correct. Also watch for **NOT**, **CANNOT** and **EXCEPT** in the question."],
-  ["exam", "What is the official preparation recommended in the exam guide?", "- Hands-on experience: about **3 months** of using Tableau Desktop\n- Tableau’s **Desktop Foundations** course (previously Desktop I: Fundamentals) and the exam-readiness material on Trailhead Academy\n- Tableau Help pages for each objective\n- Practice with the **Sample – Superstore** dataset, which most practice questions use"],
-  ["exam", "Which dataset do most practice questions use, and what fields should you know in it?", "**Sample – Superstore**: Orders, People and Returns.\n\nKnow the fields: Order Date, Ship Date, Ship Mode, Segment, Region, State, City, Category, Sub-Category, Product Name, Customer Name, Sales, Profit, Quantity, Discount."],
-
-  // ======== 1.1 CONNECTIONS & EXTRACTS ========
+// q = question, a = answer. Inline markup: `code`, **bold**, *italic*, [[blue pill]], {{green pill}}, blank line = new paragraph,
+// "- " lines = list. "Exam-style:" at the start of a question adds a tag; "- " lines in a question are answer options.
+function hash(t) { let h = 5381; for (let i = 0; i < t.length; i++) h = ((h << 5) + h + t.charCodeAt(i)) >>> 0; return h.toString(36); }
+const CARDS = [
+  ["exam", "What is the exam called, and what was its old name?", "**Salesforce Certified Tableau Desktop Foundations**, exam code **Analytics-101**.\n\nIt used to be called **Tableau Desktop Specialist**. The topics carried over, so older “Desktop Specialist” material still helps, but check it against the current guide."],
+  ["exam", "What is the exam format?", "- **40** scored questions, plus up to **5 unscored** questions that are not marked\n- Multiple choice and multiple select\n- **70 minutes**\n- Passing score: **48%** (English)\n- Fee: **75 USD** plus tax; retakes are **free**\n- Proctored online or at a test centre\n- No prerequisites"],
+  ["exam", "Can you use Tableau, notes or the internet during the exam?", "**No.** No hard-copy or online materials are allowed, and Tableau is not open. You must know where things are: which menu, which pane, which right-click option."],
+  ["exam", "Which version of Tableau is the exam based on?", "**Tableau 2022.3.** Menu names and features follow that version. Features added later are not tested."],
+  ["exam", "What are the four domains and their weights?", "- **1** Connecting to and preparing data: **23%** (about 9 questions)\n- **2** Exploring and analyzing data: **37%** (about 15)\n- **3** Sharing insights: **25%** (about 10)\n- **4** Understanding Tableau concepts: **15%** (about 6)"],
+  ["exam", "How many questions do you need to get right to pass?", "About **20 of the 40** scored questions (48%). You can’t tell which questions are unscored, so treat every question as if it counts."],
+  ["exam", "How much time do you have per question?", "Up to 45 questions in 70 minutes is about **90 seconds** each. Answer the easy ones first, flag the hard ones, and come back. No penalty for guessing is published, so never leave a question blank."],
+  ["exam", "What should you look for when reading a multiple-select question?", "The number to choose (“Choose 2”), and words like **NOT**, **CANNOT** and **EXCEPT**. Treat it as all or nothing: every choice must be right."],
+  ["exam", "How should you prepare for the exam?", "- At least **3 months** of hands-on use of Tableau Desktop, as Salesforce recommends\n- Tableau’s **Desktop I: Fundamentals** course\n- Tableau Desktop Help for each objective\n- Practice with **Sample – Superstore**, which most practice questions use"],
+  ["exam", "Which dataset do most practice questions use, and what is in it?", "**Sample – Superstore**, with the tables **Orders**, **People** and **Returns**.\n\nKnow the fields: Order Date, Ship Date, Ship Mode, Segment, Region, State, City, Category, Sub-Category, Product Name, Customer Name, Sales, Profit, Quantity, Discount."],
+  ["ui", "Name the main parts of the Tableau Desktop workspace.", "- **Toolbar** across the top\n- **Side Bar** with the **Data pane** and **Analytics pane**\n- **Cards and shelves**: Columns, Rows, Pages, Filters, Marks\n- The **view** (canvas)\n- **Sheet tabs** and the **Data Source** tab at the bottom\n- The **status bar** at the very bottom"],
+  ["ui", "What three panes does the Start page have?", "**Connect** (To a File, To a Server, Saved Data Sources), **Open** (recent workbooks) and **Discover** (training and resources). The Tableau icon on the toolbar takes you back to it."],
+  ["ui", "How is the Data pane organised in Tableau 2022.3?", "Fields are grouped **by table**. Inside each table, **dimensions** are above a grey line and **measures** below it. Parameters have their own section at the bottom. Generated fields such as Measure Names, Measure Values and Latitude/Longitude (generated) also appear."],
+  ["ui", "What are the shelves in a worksheet?", "**Columns**, **Rows**, **Filters** and **Pages**, plus the **Marks** card. Fields on Columns make columns across the view; fields on Rows make rows down the view."],
+  ["ui", "What does the **Pages** shelf do?", "Splits the view into a series of pages, one per value of the field (e.g. one page per month). A player control lets you step or play through them, like an animation."],
+  ["ui", "What does the status bar show?", "Information about the view, e.g. **“48 marks, 12 rows by 4 columns, SUM(Sales): 2,297,201”**, plus descriptions of menu items. Show or hide it with **Window > Show Status Bar**."],
+  ["ui", "What is the **special values indicator**, e.g. “12 nulls”?", "A small label at the bottom right of a view. It appears when a field has **null values**, **unknown geographic locations**, or zero/negative values on a log axis. Click it to filter the values, show them at a default position, or edit locations."],
+  ["ui", "How does **Show Me** mark its recommended chart?", "With an **orange outline**. Charts you can’t build with the selected fields are greyed out. Open Show Me with the toolbar button or **Ctrl+1**."],
+  ["ui", "What do **Pause Auto Updates** and **Run Update** do?", "**Pause Auto Updates (F10)** stops Tableau from querying after every change, which helps with large data. **Run Update (F9)** runs the query once while updates are paused."],
+  ["ui", "What does the toolbar **Clear** button do?", "Clears the worksheet. Its drop-down clears only **filters**, **formatting**, **sizing** or **axis ranges**. Shortcut to clear the sheet: Alt+Shift+Backspace."],
+  ["ui", "What does the toolbar **New Worksheet** drop-down let you create?", "A new **worksheet**, **dashboard** or **story**. Shortcut for a new worksheet: **Ctrl+M**. You can also use the three icons next to the sheet tabs."],
+  ["ui", "What happens when you **right-drag** a field onto a shelf?", "The **Drop Field** menu opens, so you choose exactly what to add, e.g. MONTH(Order Date) as a continuous value, or AVG(Sales) instead of SUM(Sales). On a Mac, use Option-drag."],
+  ["ui", "How do you copy a pill from one shelf to another?", "Hold **Ctrl** (Windows) or **Command** (Mac) while you drag it. Without Ctrl the pill moves."],
+  ["ui", "How do you open presentation mode?", "**F7** (or Ctrl+H), or the **Presentation Mode** toolbar button. It hides everything except the view."],
+  ["ui", "Match the shortcuts: Ctrl+D, Ctrl+M, Ctrl+W, F5, Ctrl+E.", "- **Ctrl+D** connect to data\n- **Ctrl+M** new worksheet\n- **Ctrl+W** swap rows and columns\n- **F5** refresh the data source\n- **Ctrl+E** describe sheet"],
+  ["ui", "How far back can **Undo** go?", "Back to the last time you **opened** the workbook, even past a save. Ctrl+Z undoes, Ctrl+Y redoes."],
+  ["ui", "What does the **Fix Axes** toolbar button do?", "Switches an axis between a **fixed** range and an **automatic** one, so the axis doesn’t jump when filters change."],
   ["conn", "What is the difference between a live connection and an extract?", "**Live**: Tableau sends queries straight to the source every time the view changes. Data is always current; speed depends on the database.\n\n**Extract**: a compressed snapshot of the data saved in a `.hyper` file. Usually faster, works offline, but is only as current as its last refresh."],
-  ["conn", "Give three reasons to use an extract instead of a live connection.", "- The source is slow, or you don’t want to load the production database\n- You need to work **offline** or share a packaged workbook without database access\n- You only need a subset of the data (extract filters, aggregation, hidden fields)\n\nPublishing to **Tableau Public** also requires an extract."],
-  ["conn", "When is a live connection the better choice?", "When people need **real-time** data, when the database is already fast (an analytical database), or when security rules don’t allow copying the data out of the source."],
+  ["conn", "Give three reasons to use an extract instead of a live connection.", "- The source is slow, or you don’t want to load the production database\n- You need to work **offline** or share a packaged workbook without database access\n- You only need part of the data (extract filters, aggregation, hidden fields)\n\nWorkbooks on **Tableau Public** must also use extracts."],
+  ["conn", "When is a live connection the better choice?", "When people need **real-time** data, when the database is already fast, or when security rules don’t allow copying data out of the source."],
+  ["conn", "How do you create a live connection to an Excel file?", "Start page **Connect** pane > **Microsoft Excel** > choose the file. Drag a sheet onto the canvas. **Live** is the default on the Data Source page."],
+  ["conn", "Where do you choose between Live and Extract when you connect?", "On the **Data Source page**, top right: the **Connection** options **Live** / **Extract**. Click **Edit** next to Extract to set its options."],
+  ["conn", "How else can you create an extract after you have started building views?", "**Data** menu > *data source name* > **Extract Data…**, or right-click the data source in the Data pane > **Extract Data…**"],
   ["conn", "What file extension does a modern Tableau extract use?", "`.hyper` (since Tableau 10.5). Older versions used `.tde`."],
-  ["conn", "Where do you choose between Live and Extract when you connect?", "On the **Data Source page**, top right: the **Connection** radio buttons **Live** / **Extract**. Click **Edit** next to Extract to set its options."],
-  ["conn", "How else can you create an extract after you are already building views?", "**Data** menu > *data source name* > **Extract Data…**, or right-click the data source in the Data pane > **Extract Data…**"],
-  ["conn", "What options can you set when you create an extract?", "- **Filters** (extract filters) to keep only some rows\n- **Aggregate data for visible dimensions**: roll rows up\n- **Number of rows**: All rows, Incremental refresh, Top N, or Sample\n- **Hide all unused fields**\n- Store data in a single table or multiple tables"],
-  ["conn", "Full refresh vs incremental refresh of an extract?", "**Full refresh** replaces all data in the extract.\n\n**Incremental refresh** only adds rows that are new since the last refresh, based on a column that increases, such as a date or ID. It does not update changed or deleted rows."],
-  ["conn", "How do you refresh an extract in Tableau Desktop?", "**Data** menu > *data source* > **Extract** > **Refresh**, or right-click the data source > Extract > Refresh."],
-  ["conn", "How do you switch an extract back to a live connection?", "Right-click the data source > **Extract** > **Remove** (or untick **Use Extract**), or choose **Live** on the Data Source page."],
-  ["conn", "What does a `.tds` file save?", "The **connection information and metadata**: server/file path, renamed fields, aliases, groups, sets, calculated fields, default properties and folders.\n\nIt contains **no data**. Opening it requires access to the original source."],
-  ["conn", "`.tds` vs `.tdsx`?", "`.tds` = data source definition only (metadata).\n\n`.tdsx` = **packaged** data source: the `.tds` plus the local data (an extract or local file), so it can be opened by someone without access to the original."],
-  ["conn", "How do you save a data source with its metadata for reuse?", "Right-click the data source in the Data pane > **Add to Saved Data Sources…** (saves a `.tds` or `.tdsx`). It then appears under **Saved Data Sources** on the Connect pane."],
-  ["conn", "Match the file types: `.twb`, `.twbx`, `.tds`, `.tdsx`, `.hyper`, `.tbm`.", "- `.twb` workbook (XML, **no data**)\n- `.twbx` **packaged workbook**: workbook + extracts, local files, images\n- `.tds` data source metadata\n- `.tdsx` packaged data source\n- `.hyper` extract\n- `.tbm` bookmark (a single worksheet)"],
-  ["conn", "What are the main groups in the Connect pane?", "- **To a File**: Microsoft Excel, Text file (CSV), JSON, PDF, Spatial file, Statistical file, More…\n- **To a Server**: databases and cloud sources\n- **Saved Data Sources**: Sample – Superstore and your own `.tds` files"],
-  ["conn", "How do you create one data source with more than one connection?", "On the Data Source page click **Add** next to Connections and connect to a second source. You can then relate or join tables across the two databases (a **cross-database join** / relationship). Each connection gets its own colour."],
-  ["conn", "What does **Data Interpreter** do?", "Cleans messy **Excel, CSV, PDF and Google Sheets** files: it removes titles, notes, blank rows and merged header cells and finds the real table. Turn it on with the **Use Data Interpreter** checkbox on the Data Source page; *Review the results* opens an Excel file showing what it kept."],
-  ["conn", "What does **Pivot** do on the Data Source page?", "Turns columns into rows. Select several columns (e.g. 2023, 2024, 2025) > right-click > **Pivot**. You get two new fields: **Pivot Field Names** and **Pivot Field Values**. Useful when each year or month is its own column."],
-  ["conn", "How do you split a string field like “Smith, Anna” into two fields?", "Right-click the field > **Transform** > **Split** (automatic) or **Custom Split…** (choose the separator and which columns to keep). Available in the Data pane or on the Data Source page."],
-  ["conn", "Data source filter vs extract filter?", "**Extract filter**: limits which rows go *into* the extract file.\n\n**Data source filter**: limits rows for every sheet using the data source; works for live connections and extracts. Add it on the Data Source page (top right, **Filters > Add**).\n\nBoth run before every other filter."],
-  ["conn", "How do you point a workbook at a different data source with the same fields?", "**Data** menu > **Replace Data Source…**. Sheets keep working if the field names match."],
-  ["conn", "How do you change the file a data source points to (e.g. a new copy of the Excel file)?", "Right-click the data source > **Edit Data Source** > **Edit connection**, or on the Data Source page hover the connection and choose **Edit Connection**."],
-  ["conn", "Exam-style: you send a colleague a `.twb` file built on an Excel file on your laptop. They can’t see any data. Why, and what should you send instead?", "A `.twb` contains no data, only a link to *your* file path. Send a **packaged workbook (`.twbx`)**, which includes the Excel file or extract."],
-
-  // ======== 1.2 DATA MODEL ========
-  ["model", "What are the two layers of the Tableau data model?", "**Logical layer** (what you see first): logical tables connected by **relationships** (the “noodles”).\n\n**Physical layer**: double-click a logical table to open it; inside, you combine tables with **joins** and **unions**. A logical table can contain many physical tables."],
-  ["model", "What is a relationship?", "A flexible connection between two logical tables based on matching fields. Tableau decides the join type **at query time** using only the fields in the view, so each table keeps its own level of detail and values are **not duplicated**."],
+  ["conn", "What options can you set when you create an extract?", "- **Filters** (extract filters) to keep only some rows\n- **Aggregate data for visible dimensions**, optionally rolling dates up to a level\n- **Number of rows**: All rows (with optional incremental refresh), Top N, or Sample\n- **Hide All Unused Fields**\n- Store data as a single table or multiple tables"],
+  ["conn", "Full refresh vs incremental refresh of an extract?", "**Full refresh** replaces all the data in the extract.\n\n**Incremental refresh** only adds rows that are new since the last refresh, based on a column that increases, such as a date or ID. It does **not** update changed or deleted rows."],
+  ["conn", "How do you refresh an extract in Tableau Desktop?", "**Data** menu > *data source* > **Extract** > **Refresh**, or right-click the data source > **Extract** > **Refresh**."],
+  ["conn", "How do you switch an extract back to a live connection?", "Right-click the data source > **Extract** > **Remove**, or untick **Use Extract**, or choose **Live** on the Data Source page."],
+  ["conn", "What does a `.tds` file save?", "The **connection information and metadata**: file path or server, renamed fields, aliases, groups, sets, calculated fields, default properties and folders.\n\nIt contains **no data**, so the user still needs access to the original source."],
+  ["conn", "`.tds` vs `.tdsx`?", "`.tds` = data source definition only (metadata).\n\n`.tdsx` = **packaged** data source: the `.tds` plus local data (an extract or local file), so someone without access to the original can open it."],
+  ["conn", "How do you save a data source with its metadata so you can reuse it?", "Right-click the data source in the Data pane > **Add to Saved Data Sources…** It saves a `.tds` (or `.tdsx`), which then appears under **Saved Data Sources** on the Connect pane."],
+  ["conn", "Match the file types: `.twb`, `.twbx`, `.tds`, `.tdsx`, `.hyper`, `.tbm`.", "- `.twb` workbook (**no data**)\n- `.twbx` **packaged workbook**: workbook + extracts, local files, images\n- `.tds` data source metadata\n- `.tdsx` packaged data source\n- `.hyper` extract\n- `.tbm` bookmark (one worksheet)"],
+  ["conn", "What are the groups in the Connect pane?", "- **To a File**: Microsoft Excel, Text file, JSON file, PDF file, Spatial file, Statistical file, and more\n- **To a Server**: databases and cloud sources\n- **Saved Data Sources**: e.g. Sample – Superstore and your own `.tds` files"],
+  ["conn", "How do you create one data source that uses more than one connection?", "On the Data Source page, click **Add** next to **Connections** and connect to a second source. You can then relate or join tables across the two sources (a **cross-database** join). Each connection gets its own colour."],
+  ["conn", "Exam-style: you send a colleague a `.twb` built on an Excel file on your laptop. They see no data. Why, and what should you send?", "A `.twb` has no data, only a link to *your* file path. Send a **packaged workbook (`.twbx`)**, which includes the Excel file or extract."],
+  ["conn", "Exam-style: a dashboard on a slow database takes 30 seconds to load, and the data only changes once a day. What do you change?", "Use an **extract** and refresh it once a day (for example on a schedule on Tableau Server). Queries then run against the fast `.hyper` file instead of the database."],
+  ["prep", "What does **Data Interpreter** do?", "Cleans messy **Excel, CSV, PDF and Google Sheets** files: it skips titles, notes and blank rows, and finds the real table and headers. Turn it on with **Use Data Interpreter** on the Data Source page. **Review the results** opens an Excel file showing what it kept."],
+  ["prep", "What does **Pivot** do on the Data Source page?", "Turns columns into rows. Select several columns (e.g. Jan, Feb, Mar) > right-click > **Pivot**. You get two new fields: **Pivot Field Names** and **Pivot Field Values**. Rename them, e.g. Month and Sales."],
+  ["prep", "When do you need to pivot data?", "When the same kind of value is spread across many columns, for example one column per year or month. Tableau works best with one column per variable, so you pivot those columns into rows."],
+  ["prep", "How do you split “Smith, Anna” into a last name and a first name?", "Right-click the field > **Transform** > **Split** (automatic) or **Custom Split…** (choose the separator, e.g. a comma, and which parts to keep). Works on the Data Source page and in the Data pane."],
+  ["prep", "What is a data source filter, and where do you add it?", "A filter that limits the rows for **every sheet** using that data source. Add it on the **Data Source page**, top right: **Filters > Add**. It works for live connections and extracts."],
+  ["prep", "Extract filter vs data source filter?", "An **extract filter** limits which rows go **into** the extract file.\n\nA **data source filter** limits rows for all sheets using the data source, live or extract.\n\nBoth run before any filter on a worksheet."],
+  ["prep", "How do you point a workbook at a different data source with the same fields?", "**Data** menu > **Replace Data Source…** Sheets keep working if the field names match."],
+  ["prep", "How do you point a data source at a new copy of its file?", "On the Data Source page, use **Edit Connection** on the connection, or Data menu > *data source* > **Edit Data Source**, then pick the new file."],
+  ["prep", "How do you rename a table or connection on the Data Source page?", "Double-click its name (or right-click > **Rename**). Renaming a data source in the Data pane works the same way and doesn’t change the file."],
+  ["prep", "Exam-style: an Excel export has a logo, two title rows and a total row at the bottom. Tableau reads the headers as F1, F2, F3. What do you try first?", "Turn on **Data Interpreter**. Then exclude the total row with a filter if it remains."],
+  ["model", "What are the two layers of the Tableau data model?", "**Logical layer** (what you see first): logical tables connected by **relationships** (the “noodles”).\n\n**Physical layer**: double-click a logical table to open it. Inside, you combine tables with **joins** and **unions**. One logical table can contain many physical tables."],
+  ["model", "What is a relationship?", "A flexible connection between two logical tables based on matching fields. Tableau picks the join type **at query time**, using only the tables needed for the fields in the view. Each table keeps its own level of detail, so values are **not duplicated**."],
   ["model", "Why are relationships the default and usually safer than joins?", "- No need to choose a join type\n- Tables at different levels of detail don’t duplicate measures\n- Unmatched rows are kept\n- Only the tables needed for the current view are queried"],
-  ["model", "How do you add a relationship?", "Drag a second table onto the canvas next to the first (logical layer). Tableau draws a noodle; choose the matching fields in the dialog. You can add more field pairs or use a calculated field as the key."],
-  ["model", "What do the relationship **Performance Options** set by default?", "Cardinality **Many-to-Many** and referential integrity **Some records match**. Change them only if you know the data, e.g. One-to-Many with All records match can speed up queries."],
-  ["model", "Name the four join types and what each keeps.", "- **Inner**: only rows that match in both tables\n- **Left**: all rows from the left table + matches from the right\n- **Right**: all rows from the right table + matches from the left\n- **Full outer**: all rows from both tables"],
+  ["model", "How do you add a relationship?", "Drag a second table onto the canvas next to the first (logical layer). Tableau draws a noodle; choose the matching fields in the dialog. You can add more field pairs, or use a calculation as the key."],
+  ["model", "What do a relationship’s **Performance Options** default to?", "Cardinality **Many** to **Many**, and referential integrity **Some records match**. Change them only if you know the data, e.g. Many-to-One with All records match can make queries faster."],
+  ["model", "Name the four join types and what each keeps.", "- **Inner**: only rows that match in both tables\n- **Left**: all rows from the left table, plus matches from the right\n- **Right**: all rows from the right table, plus matches from the left\n- **Full outer**: all rows from both tables"],
   ["model", "In a left join, what appears in the right table’s fields when there is no match?", "**Null**."],
   ["model", "How do you create a join?", "Double-click a logical table to open the physical layer, then drag a second table next to it. Click the **join icon** (the two circles) to choose the join type and the join clause."],
-  ["model", "Which operators can a join clause use?", "`=`, `<>`, `<`, `<=`, `>`, `>=`. You can also join on a **calculation** (Create Join Calculation…)."],
-  ["model", "What is a union?", "Appending rows: tables with the same structure are **stacked on top of each other** (e.g. Orders_2024 + Orders_2025). The result is longer, not wider."],
+  ["model", "Which operators can a join clause use?", "`=`, `<>`, `<`, `<=`, `>`, `>=`. You can also join on a calculation (**Create Join Calculation…**)."],
+  ["model", "What is a union?", "Appending rows: tables with the same columns are **stacked on top of each other** (e.g. Orders_2024 + Orders_2025). The result is longer, not wider."],
   ["model", "Join vs union in one sentence?", "A **join** adds **columns** (combines tables side by side on a key). A **union** adds **rows** (stacks tables with the same columns)."],
-  ["model", "How do you create a union?", "In the physical layer, drag a table **below** another until “Drag table to union” appears, or drag **New Union** from the left pane. A **wildcard union** picks files or sheets by name pattern (e.g. `Orders*`)."],
-  ["model", "What new fields does a union add?", "**Sheet** and **Table Name** (or **Path** for files), showing which source each row came from. If columns have different names, use **Merge Mismatched Fields**."],
+  ["model", "How do you create a union?", "In the physical layer, drag a table **below** another until “Drag table to union” appears, or drag **New Union** from the left pane. A **wildcard union** picks files or sheets by name pattern, e.g. `Orders*`."],
+  ["model", "What extra fields does a union add?", "Fields showing where each row came from: **Sheet** and **Table Name** for Excel, **Path** and **Table Name** for files. If columns are named differently, select them and use **Merge Mismatched Fields**."],
   ["model", "When should you use a join instead of a relationship?", "When you need **control of the join type** (e.g. an inner join to keep only matches), or you need one flat table at a single level of detail. Otherwise relationships are recommended."],
-  ["model", "Exam-style: you join Orders (one row per order line) to a Targets table (one row per region). Sales totals are now much too high. What happened?", "The join **duplicated** each target row and multiplied measures, because the tables have different levels of detail. Use a **relationship** instead, or aggregate one table first."],
-  ["model", "Relationship vs data blend?", "Both combine sources with different levels of detail. A **relationship** is defined once in the data source. A **blend** is set per worksheet, combines two separate data sources (primary and secondary), and aggregates the secondary before joining like a left join."],
-  ["model", "How do you recognise the primary and secondary data source in a blend?", "The **primary** source has a **blue** check mark; the **secondary** has an **orange** check mark. Linking fields show an **orange chain** icon in the secondary source. The first source you use in a sheet becomes primary."],
-  ["model", "Can you join tables from two different databases?", "Yes, with a **cross-database join** (or relationship): add both connections to the same data source, then join or relate their tables."],
-
-  // ======== 1.3 DATA PROPERTIES ========
-  ["props", "How do you rename a field, and does it change the source data?", "Right-click > **Rename** (or double-click its name). Only the name in Tableau changes, not the source. You can see the original name in the field’s tooltip."],
-  ["props", "What is an alias?", "A different display name for a **member** (value) of a dimension, e.g. show “CA” as “California”. Right-click the dimension > **Aliases…** It changes labels only, not the data."],
-  ["props", "Can you create aliases for a continuous measure like Sales?", "**No.** Aliases work only for members of **discrete dimensions**."],
-  ["props", "How do you assign a geographic role?", "Right-click the field > **Geographic Role** > Country/Region, State/Province, County, City, Postcode, Airport, etc. The field’s icon becomes a **globe**, and Tableau generates **Latitude (generated)** and **Longitude (generated)**."],
-  ["props", "Some cities don’t appear on the map. How do you fix it?", "Click the **“N unknown”** indicator at the bottom right of the map, or use **Map** > **Edit Locations…** to match unrecognised or ambiguous names, or add a State/Country field for context."],
-  ["props", "Name the data types in Tableau and their icons.", "- **String**: Abc\n- **Number (decimal)** and **Number (whole)**: #\n- **Date**: calendar\n- **Date & Time**: calendar with clock\n- **Boolean**: T|F\n- **Geographic**: globe"],
+  ["model", "Exam-style: you join Orders (one row per order line) to Targets (one row per region). Sales totals are now far too high. What happened?", "The join **duplicated rows**, because the tables have different levels of detail. Use a **relationship** instead, or aggregate one table first."],
+  ["model", "Relationship vs data blend?", "Both combine data at different levels of detail. A **relationship** is defined once in the data source. A **blend** is set up per worksheet between two separate data sources (primary and secondary); the secondary is aggregated and combined like a left join."],
+  ["model", "How do you recognise the primary and secondary data source in a blend?", "The **primary** source has a **blue** check mark; the **secondary** has an **orange** one. Linking fields show an **orange chain** icon. The first source you use in a sheet becomes primary."],
+  ["model", "Exam-style: you need every customer from Customers, including those who never ordered, next to their orders. Which join?", "A **left join** from Customers to Orders (or a relationship, which keeps unmatched rows too). Customers with no orders get nulls in the order fields."],
+  ["props", "How do you rename a field, and does it change the source?", "Right-click > **Rename**, or double-click the name. Only the name in Tableau changes, not the source data."],
+  ["props", "What is an alias?", "A display name for a **value** (member) of a dimension, e.g. show “CA” as “California”. Right-click the field > **Aliases…** It changes labels only, not the data."],
+  ["props", "Which fields can’t have aliases?", "**Measures**, **continuous dimensions** and **dates**. Aliases work only for members of discrete dimensions."],
+  ["props", "How do you assign a geographic role?", "Right-click the field > **Geographic Role** > choose one. The field’s icon becomes a **globe**, and Tableau generates **Latitude (generated)** and **Longitude (generated)**."],
+  ["props", "Name some geographic roles.", "Airport, Area Code (U.S.), CBSA/MSA (U.S.), City, Congressional District (U.S.), Country/Region, County, NUTS Europe, State/Province, ZIP Code/Postcode. Plus **Latitude** and **Longitude** for your own coordinates."],
+  ["props", "Name the data types in Tableau and their icons.", "- **String**: Abc\n- **Number** (decimal or whole): #\n- **Date**: calendar\n- **Date & Time**: calendar with a clock\n- **Boolean**: T|F\n- **Geographic**: globe"],
   ["props", "How do you change a field’s data type?", "Click the data type **icon** next to the field (Data pane or Data Source page) and pick a new type, or right-click > **Change Data Type**."],
-  ["props", "Which default properties can you set on a **measure**?", "Right-click > **Default Properties** >\n\n- **Number Format** (currency, percentage, decimals)\n- **Aggregation** (Sum, Average, Median…)\n- **Total Using**\n- **Color** and **Comment**"],
-  ["props", "Which default properties can you set on a **dimension**?", "**Comment, Color, Shape, Sort** and **Aliases**."],
+  ["props", "Which default properties can you set on a **measure**?", "Right-click > **Default Properties** > **Comment**, **Color**, **Number Format**, **Aggregation**, **Total Using**."],
+  ["props", "Which default properties can you set on a **dimension**?", "**Comment**, **Color**, **Shape**, **Sort** and **Aliases**."],
   ["props", "Which default properties are special to **date** fields?", "**Date Format** and **Fiscal Year Start**."],
-  ["props", "Why set default properties instead of formatting each sheet?", "They apply to **every new view** that uses the field, so Profit is always shown as currency and Ship Mode always gets the same colours across the workbook."],
-  ["props", "How do you turn a numeric field like Postal Code or Row ID into a dimension?", "Drag it above the line into Dimensions, or right-click > **Convert to Dimension**. Use **Convert to Discrete** to make it blue."],
-  ["props", "How do you hide fields you don’t need?", "Right-click > **Hide**. Show them again via the Data pane menu > **Show Hidden Fields**. Hidden fields are left out of extracts when you choose Hide all unused fields."],
-  ["props", "How do you organise a long Data pane?", "Use **folders**: Data pane menu > **Group by Folder**, then right-click > **Create Folder**. You can also sort the pane and create **hierarchies**."],
-  ["props", "What does the field called “Orders (Count)” do?", "It is an automatically generated measure that counts the rows of that table. In older versions it was called **Number of Records**."],
-  ["props", "What does the **=** sign before a field’s icon mean?", "It is a **calculated field** created in Tableau, not a column from the source."],
-
-  // ======== 2.1 BASIC CHARTS ========
-  ["charts", "What is **Show Me**, and how does it decide which charts are available?", "A panel (top right) that builds a chart from the fields you select. Charts you can’t make with those fields are greyed out; the outlined one is the recommendation. The bottom of the panel shows what each chart needs, e.g. “1 date, 1 or more measures”."],
-  ["charts", "How do you build a bar chart?", "A dimension on Rows (or Columns) and a measure on the other shelf, e.g. [[Category]] on Rows, {{SUM(Sales)}} on Columns. The marks type is Automatic → Bar."],
+  ["props", "Why set default properties instead of formatting each sheet?", "They apply to **every new view** that uses the field, so Profit is always currency and Ship Mode always gets the same colours across the workbook."],
+  ["props", "How do you make a numeric field like Postal Code a dimension?", "Right-click > **Convert to Dimension** (or drag it above the line). Use **Convert to Discrete** to make its pill blue."],
+  ["props", "How do you hide fields you don’t need?", "Right-click > **Hide**. Show them again with the Data pane menu > **Show Hidden Fields**. Hidden fields are left out when you create an extract."],
+  ["props", "How do you organise a long Data pane with folders?", "Data pane menu > **Group by Folder**, then right-click > **Folders** > **Create Folder…** and drag fields into it."],
+  ["props", "What is the field “Orders (Count)”?", "A generated measure that counts the rows of the Orders table. Before Tableau 2020.2 it was called **Number of Records**."],
+  ["props", "What does an **=** sign before a field’s icon mean?", "It is a **calculated field** created in Tableau, not a column from the source."],
+  ["props", "Exam-style: every new chart shows Profit as 12345.678. How do you show it as $12,346 everywhere?", "Right-click Profit > **Default Properties** > **Number Format…** > **Currency (Custom)** with 0 decimals."],
+  ["charts", "How do you build a bar chart?", "A dimension on Rows (or Columns) and a measure on the other shelf, e.g. [[Category]] on Rows and {{SUM(Sales)}} on Columns. The Automatic mark type becomes **Bar**."],
   ["charts", "How do you make a **stacked** bar chart?", "Build a bar chart, then drag a second dimension to **Color** on the Marks card (e.g. Segment)."],
-  ["charts", "How do you build a line chart?", "A **date** on Columns and a measure on Rows. Tableau chooses Line marks automatically when a date is on Columns."],
-  ["charts", "Continuous vs discrete date on a line chart?", "**Continuous date** {{MONTH(Order Date)}}: one unbroken timeline along an **axis**.\n\n**Discrete date part** [[MONTH(Order Date)]]: one header per month; all Januaries are combined, which shows **seasonality**."],
-  ["charts", "How do you build a scatter plot?", "Put a **measure on Rows and a measure on Columns** (e.g. Sales vs Profit). You get one mark until you add a dimension to **Detail** (e.g. Customer Name) or disaggregate measures."],
-  ["charts", "How do you build a map with geographic data?", "Double-click a field with a geographic role (e.g. State). Tableau puts **Longitude (generated)** on Columns and **Latitude (generated)** on Rows and draws a symbol map. Change the marks type to **Map** for a filled map."],
-  ["charts", "Symbol map vs filled map?", "**Symbol map** (Circle marks, size by measure): good for points and comparing values.\n\n**Filled map** (Map marks, colour by measure): colours whole areas such as states or countries."],
-  ["charts", "What is a **density map** and when do you use it?", "Marks type **Density**: overlapping points become a heat-like surface coloured by concentration. Use it when you have many points in a small area (e.g. thousands of store locations). Adjust it with Color > Intensity."],
-  ["charts", "How do you make a **dual-axis** chart?", "Put two measures on Rows (or Columns), then right-click the **second** pill > **Dual Axis**. Each measure keeps its **own axis and own Marks card**, so you can use bars for one and a line for the other. Right-click an axis > **Synchronize Axis** if they share units."],
-  ["charts", "How do you make a **combined (shared) axis** chart?", "Drag a second measure onto the **existing axis** (wait for the double-ruler icon). Tableau replaces it with **Measure Values** and adds **Measure Names** to Color; both measures share one axis and one mark type."],
-  ["charts", "Dual axis vs combined axis?", "**Dual**: two independent axes (left and right), separate Marks cards, can use different mark types.\n\n**Combined**: one shared axis, Measure Names/Measure Values, same mark type. Best when measures have the same units."],
-  ["charts", "How do you build a text table (crosstab)?", "Dimensions on Rows and Columns, a measure on **Text** on the Marks card. With several measures, Measure Names goes on Columns and Measure Values on Text."],
-  ["charts", "How do you turn a text table into a **highlight table**?", "Drag the measure to **Color** as well (marks type **Square**). Each cell is coloured by its value; Show Me needs 1 or more dimensions and exactly 1 measure."],
-  ["charts", "What does a **treemap** need and show?", "1+ dimensions and 1–2 measures. Nested rectangles: **size** by one measure, **colour** by another. Good for part-to-whole with many categories."],
-  ["charts", "How do you make a pie chart?", "Marks type **Pie**: a dimension on **Color** and a measure on **Angle**. Increase Size to make it bigger. Show Me: 1+ dimensions, 1–2 measures."],
-  ["charts", "How do you build a histogram?", "Select one measure and choose **Histogram** in Show Me. Tableau creates a **bin** field for the measure, puts it on Columns, and counts records on Rows."],
-  ["charts", "What does a box plot show?", "The distribution of a measure: median, quartiles (box = middle 50%), and whiskers to the furthest point within **1.5 × IQR**. Add from Show Me or the Analytics pane."],
-  ["charts", "What is a **bullet graph**?", "A bar for an actual value with a **reference line** for the target and **distribution bands** in the background. Show Me needs 2 measures."],
-  ["charts", "What is a Gantt chart used for?", "Showing duration over time: marks type **Gantt Bar**, a date on Columns, and a duration measure on **Size** (e.g. days to ship)."],
-  ["charts", "Name the property buttons on the Marks card.", "**Color, Size, Label (Text), Detail, Tooltip**, plus **Shape** (shape marks), **Path** (line/polygon marks) and **Angle** (pie)."],
-  ["charts", "What does dropping a field on **Detail** do?", "It splits the view into more marks (one per member) **without** adding colour, size or headers. It changes the level of detail."],
-  ["charts", "What does the **Swap Rows and Columns** button do?", "Exchanges everything on Rows with Columns, e.g. vertical bars become horizontal. Toolbar button, or **Ctrl+W** (Windows)."],
-  ["charts", "Exam-style: which two fields does Tableau place on Rows and Columns when you double-click a State field with a geographic role?", "**Latitude (generated)** on Rows and **Longitude (generated)** on Columns."],
-
-  // ======== 2.2 GROUPS, SETS, HIERARCHIES ========
-  ["org", "What is a group?", "A new dimension that **combines members** of a dimension into higher-level categories, e.g. Phones + Accessories = “Mobile”. The field shows a **paperclip** icon."],
+  ["charts", "How do you make a side-by-side bar chart?", "Put two dimensions on the same shelf, e.g. [[Region]] and [[Segment]] on Columns, with SUM(Sales) on Rows. Add Segment to Color too, to make it easier to read."],
+  ["charts", "How do you build a line chart?", "A **date** on Columns and a measure on Rows. The Automatic mark type becomes **Line**."],
+  ["charts", "How do you build a scatter plot?", "A **measure on Rows and a measure on Columns** (e.g. Sales vs Profit). You get one mark until you add a dimension to **Detail** (e.g. Customer Name)."],
+  ["charts", "How do you build a text table (crosstab)?", "Dimensions on Rows and Columns and a measure on **Text** on the Marks card. With several measures, **Measure Names** goes on Columns and **Measure Values** on Text."],
+  ["charts", "How do you turn a text table into a **highlight table**?", "Put the measure on **Color** as well, with the **Square** mark type. Each cell is coloured by its value. Show Me needs 1 or more dimensions and exactly 1 measure."],
+  ["charts", "What does a **heat map** look like in Tableau?", "A grid of squares sized and/or coloured by measures, like a highlight table without the numbers. Show Me needs 1 or more dimensions and 1 or 2 measures."],
+  ["charts", "What does a **treemap** need and show?", "1 or more dimensions and 1 or 2 measures. Nested rectangles: **size** by one measure, **colour** by another. Good for part-to-whole with many categories."],
+  ["charts", "How do you make a pie chart?", "Mark type **Pie**: a dimension on **Color** and a measure on **Angle**. Increase Size to make it bigger. Show Me needs 1 or more dimensions and 1 or 2 measures."],
+  ["charts", "What does a box plot show?", "The distribution of a measure: the median, the quartiles (the box is the middle 50%), and whiskers to the furthest point within **1.5 × IQR**. Add it from Show Me or the Analytics pane."],
+  ["charts", "What is a **bullet graph**?", "A bar for the actual value, a **reference line** for the target, and **distribution bands** in the background. Show Me needs 2 measures."],
+  ["charts", "What is a Gantt chart used for?", "Showing duration over time: mark type **Gantt Bar**, a date on Columns and a duration measure on **Size** (e.g. days to ship)."],
+  ["charts", "What does the Automatic mark type choose?", "- Dimension + measure → **Bar**\n- Date + measure → **Line**\n- Measure + measure → **Shape** (a scatter plot)\n- Dimensions only → **Text**"],
+  ["charts", "List the mark types in the Marks card drop-down.", "Automatic, Bar, Line, Area, Square, Circle, Shape, Text, **Map**, Pie, Gantt Bar, Polygon, **Density**."],
+  ["charts", "Name the property buttons on the Marks card.", "**Color, Size, Label, Detail, Tooltip**, plus **Shape** (Shape marks), **Path** (Line and Polygon marks) and **Angle** (Pie marks)."],
+  ["charts", "What does dropping a field on **Detail** do?", "It splits the view into more marks (one per value) **without** adding colour, size or headers. It changes the level of detail."],
+  ["charts", "What does the **Swap Rows and Columns** button do?", "Exchanges everything on Rows with Columns, e.g. vertical bars become horizontal. Toolbar button, or **Ctrl+W**."],
+  ["charts", "How do you read Show Me’s requirements for a chart?", "Hover a chart type: the bottom of the panel says what it needs, e.g. “For horizontal bars try 0 or more Dimensions, 1 or more Measures”."],
+  ["charts", "How do you show the same chart for each region in a small multiples grid?", "Add [[Region]] to Rows or Columns next to the existing fields. Each region gets its own pane with the same axis."],
+  ["charts", "Exam-style: which chart is best to show the relationship between Discount and Profit across thousands of order lines?", "A **scatter plot**, with Discount and Profit as the two measures. Disaggregate measures (or add Row ID to Detail) to get one mark per line."],
+  ["charts", "Exam-style: you want exact sales values per Category and Region, coloured so high values stand out. Which chart?", "A **highlight table**: Category and Region as headers, SUM(Sales) on Text and on Color, Square marks."],
+  ["maps", "What happens when you double-click a field with a geographic role, like State?", "Tableau puts **Longitude (generated)** on Columns and **Latitude (generated)** on Rows, puts State on **Detail**, and draws a map with one mark per state. The default is usually a **point (symbol) map**."],
+  ["maps", "How do you build a symbol (proportional) map?", "Build a map, then drag a measure to **Size** (and optionally Color). Mark type: **Circle** or Automatic."],
+  ["maps", "How do you build a filled map?", "Put a geographic field on Detail and set the mark type to **Map**. Drag a measure to **Color** to shade each area."],
+  ["maps", "Which geographic roles can’t be shown as a filled map?", "Points such as **City** and **Airport**. Filled maps need areas such as countries, states, counties or postcodes."],
+  ["maps", "Symbol map vs filled map: when do you use each?", "**Symbol map** (circles sized by a measure): comparing amounts at points.\n\n**Filled map** (areas coloured by a measure): showing a rate or value per region, such as profit ratio by state."],
+  ["maps", "What is a **density map** and when do you use it?", "Mark type **Density**: overlapping points become a heat surface coloured by how many are close together. Use it for many points in a small area, e.g. thousands of customer locations. Adjust **Color > Intensity**."],
+  ["maps", "How do you map your own latitude and longitude columns?", "Make sure the fields have the **Latitude** and **Longitude** geographic roles (Tableau usually detects them by name). Put Longitude on Columns and Latitude on Rows as **dimensions**, or put an ID on Detail so you get one mark per point."],
+  ["maps", "Some cities don’t appear on the map. How do you fix it?", "Click the **“N unknown”** indicator at the bottom right, or **Map** > **Edit Locations…**, to match names Tableau didn’t recognise. Adding State or Country to the view also helps with ambiguous names."],
+  ["maps", "Where do you change the background map style and map layers?", "**Map** > **Background Maps** (e.g. Light, Dark, Streets, Satellite) and **Map** > **Map Layers…** (borders, labels, coastlines, data layers)."],
+  ["maps", "How do you stop viewers from panning and zooming a map?", "**Map** > **Map Options…**: untick **Allow pan and zoom** (you can also hide the map search and toolbar there)."],
+  ["maps", "Exam-style: you need a map coloured by profit ratio per country. Symbol or filled map?", "A **filled map** with Profit Ratio on Color. A ratio is a rate, so area colour reads better than circle size."],
+  ["axes", "How do you make a **dual-axis** chart?", "Put two measures on Rows (or Columns), then right-click the **second** pill > **Dual Axis**. Each measure keeps its **own axis and own Marks card**, so you can show one as bars and the other as a line."],
+  ["axes", "What does **Synchronize Axis** do on a dual-axis chart?", "Gives both axes the same range, so the two measures are on the same scale. Right-click the secondary axis > **Synchronize Axis**. Use it when both measures have the same units."],
+  ["axes", "How do you make a **combined (shared) axis** chart?", "Drag a second measure onto the **existing axis** and drop it when the two-ruler icon appears. Tableau replaces it with **Measure Values** and adds **Measure Names** to Color; both measures share one axis."],
+  ["axes", "Dual axis vs combined axis?", "**Dual**: two independent axes (left and right), a Marks card per measure, different mark types possible.\n\n**Combined**: one shared axis, Measure Names / Measure Values, one mark type. Best when the measures use the same units."],
+  ["axes", "How many measures can you combine in a dual-axis chart, and in a combined axis?", "Dual axis: **two** axes. A combined axis can hold **many** measures on one axis."],
+  ["axes", "On a dual-axis chart, how do you change the mark type of just one measure?", "Open that measure’s own tab on the **Marks** card and change its mark type. The **All** tab changes both."],
+  ["axes", "How do you undo a dual axis?", "Right-click the second measure pill and untick **Dual Axis**."],
+  ["axes", "How do you hide the second axis on a dual-axis chart?", "Right-click the axis > untick **Show Header**."],
+  ["axes", "Exam-style: you want monthly Sales as bars and Profit Ratio (a %) as a line on the same chart. Dual or combined axis?", "**Dual axis.** The measures have different units (money and %), so each needs its own axis and its own mark type."],
+  ["axes", "Exam-style: you want Sales and Profit as lines on one shared axis with a colour legend. What do you do?", "Drag Profit onto the Sales axis to make a **combined axis**. Measure Names goes to Color, which gives the legend."],
+  ["org", "What is a group?", "A new dimension that **combines values** of a dimension into higher-level categories, e.g. Phones + Accessories = “Mobile”. It shows a **paperclip** icon."],
   ["org", "Name the three ways to create a group.", "- **Data pane**: right-click the dimension > Create > **Group…**\n- **Headers**: select headers in the view > paperclip icon (Group Members)\n- **Marks**: select marks in the view > paperclip icon in the tooltip"],
-  ["org", "What does **Include ‘Other’** do in a group?", "Puts every member you didn’t group into one member called **Other**."],
-  ["org", "What is a set?", "A custom field that splits a dimension into **IN** and **OUT** of the set, e.g. Top 10 customers. It has a **Venn-diagram** icon in the Data pane."],
+  ["org", "What does **Include ‘Other’** do in a group?", "Puts every value you didn’t group into one value called **Other**."],
+  ["org", "What is a set?", "A custom field that splits a dimension into **IN** and **OUT** of the set, e.g. Top 10 customers. It shows a **Venn diagram** icon in the Data pane."],
   ["org", "Fixed set vs computed (dynamic) set?", "**Fixed**: you pick the members manually; they don’t change when the data changes.\n\n**Computed**: defined by a **condition** (e.g. SUM(Profit) > 0) or a **Top N** rule; membership updates with the data."],
-  ["org", "How do you create a set?", "- Data pane: right-click a dimension > Create > **Set…** (General, Condition, or Top tab)\n- In the view: select marks or headers > **Create Set** in the tooltip menu"],
-  ["org", "What is a **combined set**, and what are its options?", "A set made from **two sets of the same dimension**. Select both > right-click > Create Combined Set. Options:\n\n- All members in both sets\n- Shared members in both sets\n- Left set except shared\n- Right set except shared"],
-  ["org", "Group vs set?", "A **group** combines members into new categories (many possible values).\n\nA **set** divides members into **In / Out** (two values), can be dynamic, and can be used in calculations and set actions."],
-  ["org", "How do you show the actual members of a set instead of In/Out?", "Right-click the set pill > **Show Members in Set**."],
-  ["org", "How do you create a hierarchy?", "Drag one dimension **onto another** in the Data pane, or right-click > Hierarchy > **Create Hierarchy…**, then drag the other fields in the correct order (e.g. Category > Sub-Category > Product Name)."],
-  ["org", "How do you drill down and up in a hierarchy?", "Click the **+** on the pill (or header) to drill down to the next level, and **−** to drill up."],
+  ["org", "How do you create a set?", "- Data pane: right-click a dimension > Create > **Set…**, with the **General**, **Condition** and **Top** tabs\n- In the view: select marks > **Create Set** in the tooltip, or right-click > Create Set"],
+  ["org", "What is a **combined set**, and what are its options?", "A set made from **two sets on the same dimension**. Select both > right-click > **Create Combined Set**. Options:\n\n- All members in both sets\n- Shared members in both sets\n- Left set except shared members\n- Right set except shared members"],
+  ["org", "Group vs set?", "A **group** combines values into new categories (as many as you like).\n\nA **set** splits values into **In / Out**, can be dynamic, and can be used in calculations and set actions."],
+  ["org", "How do you show the members of a set instead of In/Out?", "Right-click the set pill > **Show Members in Set**. Choose **Show In/Out of Set** to switch back."],
+  ["org", "How do you use a set in a calculation?", "A set returns TRUE for members, e.g. `IF [Top Customers] THEN \"Top\" ELSE \"Other\" END`."],
+  ["org", "How do you create a hierarchy?", "Drag one dimension **onto another** in the Data pane, or right-click > **Hierarchy** > **Create Hierarchy…**, then drag the other fields in, in order (e.g. Category > Sub-Category > Product Name)."],
+  ["org", "How do you drill down and up in a hierarchy?", "Click the **+** on the pill (or on a header) to show the next level, and **−** to go back up."],
+  ["org", "Does Tableau create any hierarchies by itself?", "Yes, for **dates**: Year > Quarter > Month > Day, which you drill into with **+**. Sample – Superstore also comes with ready-made hierarchies such as Location and Product."],
   ["org", "Exam-style: you want “Furniture” and “Office Supplies” shown as one category without changing the data. What do you create?", "A **group** on Category (or select both headers and click the paperclip)."],
-
-  // ======== 2.2 FILTERS ========
-  ["filt", "How do you add a filter to a view?", "Drag a field to the **Filters** shelf, or right-click a pill > **Filter…**, or select marks/headers > **Keep Only** / **Exclude**."],
-  ["filt", "**Keep Only** vs **Exclude**?", "Both appear when you select marks. **Keep Only** removes everything except the selection; **Exclude** removes the selection. Both create a filter on the Filters shelf."],
-  ["filt", "What are the four tabs of a dimension filter?", "- **General**: tick values (Select from list, Custom list, Use all)\n- **Wildcard**: contains / starts with / ends with / exactly matches\n- **Condition**: by field or formula, e.g. SUM(Sales) > 10,000\n- **Top**: Top or Bottom N by a field"],
-  ["filt", "What options does a filter on a continuous measure give?", "Choose the aggregation first (Sum, Average…), then **Range of values, At least, At most** or **Special** (null / non-null values)."],
-  ["filt", "What options does a filter on a date give?", "First choose **Relative date**, **Range of dates**, a discrete **date part** (Years, Quarters, Months…), or **Individual dates**. Range options include Starting date, Ending date and Special."],
-  ["filt", "What is a relative date filter?", "A filter relative to today (or an anchor date), e.g. **last 3 months**, **this year**, **year to date**. It updates automatically as time passes."],
-  ["filt", "How do you show a filter so viewers can change it?", "Right-click the field on the Filters shelf > **Show Filter**. On a dashboard: the sheet’s menu > **Filters** > choose the field."],
-  ["filt", "Name filter card styles for a dimension.", "Single value (list, dropdown, slider), Multiple values (list, dropdown), Multiple values (custom list), Wildcard match. Measures and continuous dates get **sliders**."],
-  ["filt", "“All values in database” vs “Only relevant values” on a filter card?", "**All values in database** always lists every member. **Only relevant values** lists only members still possible after the other filters, so selecting Region = West shows only Western states."],
+  ["org", "Exam-style: a chart should colour the 20 most profitable customers differently, and stay correct as data changes. What do you create?", "A **computed set** on Customer Name (Top tab: Top 20 by SUM(Profit)), placed on **Color**."],
+  ["filt", "How do you add a filter to a view?", "Drag a field to the **Filters** shelf, or right-click a pill > **Filter…**, or select marks or headers > **Keep Only** / **Exclude**."],
+  ["filt", "**Keep Only** vs **Exclude**?", "Both appear when you select marks. **Keep Only** removes everything except the selection; **Exclude** removes the selection. Both add a filter to the Filters shelf."],
+  ["filt", "What are the four tabs of a dimension filter?", "- **General**: tick values, or use a custom list\n- **Wildcard**: contains / starts with / ends with / exactly matches\n- **Condition**: by field or formula, e.g. SUM(Sales) > 10,000\n- **Top**: Top or Bottom N by a field"],
+  ["filt", "What options does a filter on a measure give?", "First choose the aggregation (or All values for row level). Then **Range of values**, **At least**, **At most** or **Special** (null / non-null values)."],
+  ["filt", "How do you show a filter so viewers can change it?", "Right-click the field on the Filters shelf > **Show Filter**. On a dashboard: the sheet’s drop-down menu > **Filters** > the field."],
+  ["filt", "Name some filter card styles for a dimension.", "Single value (list, drop-down, slider), multiple values (list, drop-down), multiple values (custom list), wildcard match. Measures and continuous dates use **sliders**."],
+  ["filt", "“All values in database” vs “Only relevant values” on a filter card?", "**All values in database** always lists every value. **Only relevant values** lists only values still possible after the other filters, so choosing Region = West shows only Western states."],
+  ["filt", "What can you customise on a filter card?", "From its menu: show the **(All)** value, the **search** button, an **Apply** button, **Include/Exclude** values, and the title."],
   ["filt", "How do you apply a filter to more than one sheet?", "Right-click the filter pill > **Apply to Worksheets** >\n\n- **All Using Related Data Sources**\n- **All Using This Data Source**\n- **Selected Worksheets…**\n- **Only This Worksheet** (default)"],
-  ["filt", "What does the small icon on a filter pill tell you?", "That the filter applies to more than one sheet (all sheets using this data source, or selected worksheets)."],
-  ["filt", "What is a **context filter**, and why use one?", "A dimension filter that is applied **first**, before Top N filters, sets and FIXED calculations. Right-click > **Add to Context**; the pill turns **grey**. Use it to make a Top N filter work on filtered data, or to improve performance."],
-  ["filt", "Exam-style: you filter Top 10 Products by Sales and Region = West, but get fewer than 10 products. How do you fix it?", "Add **Region** to **context**. Top N runs before normal dimension filters, so it picked the top 10 overall, and then the West filter removed some."],
+  ["filt", "What does the small icon on a filter pill tell you?", "That the filter applies to more than one sheet (all sheets using the data source, or selected worksheets)."],
+  ["filt", "What is a **context filter**, and why use one?", "A filter that runs **before** Top N filters, sets, conditional filters and FIXED calculations. Right-click > **Add to Context**; the pill turns **grey**. Use it so a Top N works on already filtered data, or to speed up large data sources."],
   ["filt", "What colour is a context filter pill?", "**Grey.**"],
-  ["filt", "Where does a data source filter live, and what does it affect?", "On the **Data Source page**, top right (**Filters > Add**). It applies to every sheet that uses the data source and runs before context filters."],
-  ["filt", "How do you include or exclude null values with a measure filter?", "In the measure filter dialog choose **Special** > Null values / Non-null values / All values. For a date or measure range there is also an **Include null values** checkbox."],
-  ["filt", "Exam-style: which filter type is applied **last**?", "**Table calculation filters**, which only hide marks after everything else is computed."],
-
-  // ======== 2.3 SORT, ANALYTICS, TABLE CALCS ========
-  ["anal", "How can you sort a view? Give at least three ways.", "- **Toolbar** sort ascending / descending buttons\n- The **sort icon** on an axis or header\n- **Drag** a header to a new position (manual sort)\n- Right-click the dimension pill > **Sort…**"],
-  ["anal", "What options does the **Sort** dialog on a dimension offer?", "**Data source order, Alphabetic, Field** (by a measure and aggregation), **Manual**, and **Nested**. Choose ascending or descending."],
-  ["anal", "Computed sort vs manual sort?", "A **computed** sort follows a rule (e.g. by SUM(Sales)) and updates when data changes. A **manual** sort is the order you dragged or chose, and stays fixed."],
-  ["anal", "What is a nested sort?", "Sorting the inner dimension separately **within each** member of the outer dimension, e.g. Sub-Categories sorted by sales within each Category."],
-  ["anal", "What are the three sections of the **Analytics pane**?", "- **Summarize**: Constant Line, Average Line, Median with Quartiles, Box Plot, Totals\n- **Model**: Average with 95% CI, Median with 95% CI, Trend Line, Forecast, Cluster\n- **Custom**: Reference Line, Reference Band, Distribution Band, Box Plot"],
-  ["anal", "How do you add a reference line?", "Drag **Reference Line** (or Average Line, Constant Line) from the Analytics pane onto the view, or right-click an **axis** > **Add Reference Line**. A reference line needs a continuous axis."],
-  ["anal", "What scopes can a reference line have?", "**Entire Table**, **Per Pane**, or **Per Cell**."],
-  ["anal", "What values can a reference line use?", "A **constant**, an **aggregation** of a measure (Sum, Average, Median, Min, Max, Total), or a **parameter**."],
-  ["anal", "Reference line vs reference band vs distribution band?", "**Line**: one value.\n\n**Band**: shades the area between two values.\n\n**Distribution band**: shades ranges based on a distribution, e.g. percentages of the average, percentiles, quantiles, or standard deviations."],
-  ["anal", "Which models can a trend line use?", "**Linear, Logarithmic, Exponential, Power, Polynomial.** Right-click the line > **Describe Trend Line** shows the equation, R-squared and p-value."],
-  ["anal", "What does a trend line need in the view?", "**Continuous** fields on both axes (two measures, or a continuous date and a measure). It is not available with only discrete headers."],
-  ["anal", "What does Forecast need, and what method does it use?", "A **date** and a **measure**. Tableau uses **exponential smoothing**. Add it from the Analytics pane or **Analysis** > **Forecast** > Show Forecast."],
-  ["anal", "How do you show totals?", "**Analysis** > **Totals** > Show Column Grand Totals / Show Row Grand Totals / Add All Subtotals, or drag **Totals** from the Analytics pane."],
-  ["anal", "How are grand totals calculated by default?", "With the measure’s **Total Using** setting, which defaults to **Automatic** (a total over the underlying data, the same aggregation as the measure). You can change it per pill > Total Using."],
-  ["anal", "What is a table calculation?", "A calculation computed by Tableau on the **aggregated values already in the view**, such as a running total or percent of total. The pill shows a **Δ (triangle)** symbol."],
-  ["anal", "List the quick table calculations.", "Running Total, Difference, Percent Difference, Percent of Total, Rank, Percentile, Moving Average, YTD Total, Compound Growth Rate, Year over Year Growth, YTD Growth."],
-  ["anal", "How do you add a quick table calculation?", "Right-click a measure pill in the view > **Quick Table Calculation** > choose one."],
-  ["anal", "What does **Compute Using** control?", "The direction or scope of a table calculation: **Table (across), Table (down), Table (across then down), Pane (across/down), Cell**, or **Specific Dimensions**."],
-  ["anal", "Exam-style: Percent of Total shows 100% for every row. What is the likely fix?", "Change **Compute Using**: the calculation is computing per **Cell** (or the wrong direction), so each value is its own total. Use Table (down) or the right dimension."],
-  ["anal", "How do you create bins?", "Right-click a **measure** > Create > **Bins…** and set the bin size (or let Tableau suggest one). The result is a new **discrete dimension** like “Sales (bin)”."],
-  ["anal", "Exam-style: to analyse which customer orders fall in the 0–100, 100–200, 200–300 USD ranges, what do you create?", "**Bins** on Sales with a size of 100, then a histogram."],
-  ["anal", "What is clustering in the Analytics pane?", "Drag **Cluster** onto the view to group marks with k-means clustering on the measures in the view. You can save the result as a group."],
-
-  // ======== 2.3 CALCULATIONS & PARAMETERS ========
-  ["calc", "How do you create a calculated field?", "**Analysis** > **Create Calculated Field…**, or right-click in the Data pane > Create Calculated Field, or right-click a field > Create > Calculated Field. The editor shows errors and has a function list."],
-  ["calc", "Write a calculation for profit ratio.", "`SUM([Profit]) / SUM([Sales])`\n\nAggregate **before** dividing. `[Profit] / [Sales]` would compute a ratio per row and then sum the ratios, which is wrong."],
-  ["calc", "What does the error “Cannot mix aggregate and non-aggregate arguments” mean?", "You combined a row-level field and an aggregated field, e.g. `[Sales] - SUM([Profit])`. Make both aggregated or both row-level."],
-  ["calc", "Write an IF statement that labels orders with sales over 500 as “Large”.", "`IF [Sales] > 500 THEN \"Large\" ELSE \"Small\" END`\n\nAdd conditions with `ELSEIF`. Every IF ends with `END`."],
-  ["calc", "What do `IIF`, `CASE` and `IFNULL` do?", "- `IIF(test, then, else)`: a short IF\n- `CASE [Region] WHEN \"West\" THEN 1 ELSE 0 END`: compares one field to values\n- `IFNULL([Profit], 0)`: replaces null with a value\n\n`ZN([x])` replaces null with zero; `ISNULL([x])` returns TRUE/FALSE."],
+  ["filt", "Exam-style: you filter Top 10 Products by Sales and Region = West, but see fewer than 10 products. How do you fix it?", "Add the **Region** filter to **context**. Without context, Tableau finds the top 10 products across **all** regions and then the West filter removes some."],
+  ["filt", "What is Tableau’s order of operations?", "1. Extract filters\n2. Data source filters\n3. Context filters\n4. Sets, conditional and Top N filters, FIXED LOD\n5. Dimension filters\n6. Data blending\n7. INCLUDE and EXCLUDE LOD\n8. Measure filters\n9. Forecasts, table calculations, clusters, totals\n10. Trend lines and reference lines"],
+  ["filt", "Where do filters on table calculations fit?", "They act **last**: they only hide marks after the table calculation is computed. So a Percent of Total still uses all the data."],
+  ["filt", "Dimension filter vs measure filter: which runs first?", "**Dimension filters** run before measure filters. A measure filter tests the aggregated values that are left."],
+  ["filt", "How do you include or exclude null values with a measure filter?", "Choose **Special** > Null values / Non-null values / All values. Range filters also have an **Include null values** checkbox."],
+  ["filt", "Exam-style: one filter should affect every sheet that uses Superstore. What do you choose?", "Right-click the filter > **Apply to Worksheets** > **All Using This Data Source**."],
+  ["dates", "When you drag Order Date to Columns, what does Tableau show by default?", "[[YEAR(Order Date)]], a **discrete date part** (blue). Click **+** to drill down to quarter, month and day."],
+  ["dates", "Discrete date parts vs continuous date values?", "**Date parts** (discrete, blue): YEAR, QUARTER, MONTH… each part is a category; all Januaries from every year are combined.\n\n**Date values** (continuous, green): dates truncated to a level on a timeline, e.g. January 2024 and January 2025 are separate points."],
+  ["dates", "In a date pill’s menu, which part gives date parts and which gives date values?", "The **upper** group (Year, Quarter, Month, Day…) gives **date parts** (discrete). The **lower** group (e.g. “Month May 2015”) gives **date values** (continuous). There are also Exact Date, Attribute and Measure."],
+  ["dates", "How do you show a trend over the whole period on one continuous line?", "Use a **continuous** date value, e.g. {{MONTH(Order Date)}} from the lower group of the date menu."],
+  ["dates", "How do you show seasonality, e.g. which month is strongest every year?", "Use **discrete** [[MONTH(Order Date)]] on Columns and put [[YEAR(Order Date)]] on Color, so each year is a line across the 12 months."],
+  ["dates", "What date filter options do you get when you drag a date to Filters?", "**Relative dates**, **Range of dates**, **Starting date**, **Ending date**, a **date part** (Years, Quarters, Months…), or **Individual dates**, plus options such as count."],
+  ["dates", "What is a relative date filter?", "A filter relative to today (or an anchor date), e.g. **last 3 months**, **this year**, **year to date**, **next 2 weeks**. It updates automatically as time passes."],
+  ["dates", "Range of dates vs relative date filter?", "**Range of dates** uses fixed start and end dates. A **relative date** filter moves with the current date."],
+  ["dates", "What is a custom date?", "A new field at one fixed level, e.g. Order Date by Month. Right-click the date > **Create** > **Custom Date…**, choose the level and whether you want date parts or date values."],
+  ["dates", "How do you show months that have no data in a date axis or header?", "Right-click the date header > **Show Missing Values**."],
+  ["dates", "Where do you set the fiscal year?", "Right-click the date > **Default Properties** > **Fiscal Year Start**, e.g. April."],
+  ["dates", "`DATEPART`, `DATENAME`, `DATETRUNC`: what does each return?", "- `DATEPART('month', [Order Date])` → an **integer** (3)\n- `DATENAME('month', [Order Date])` → a **string** (“March”)\n- `DATETRUNC('month', [Order Date])` → a **date** (1 March)"],
+  ["dates", "What do `DATEDIFF` and `DATEADD` do?", "`DATEDIFF('day', [Order Date], [Ship Date])` → the number of days between two dates (days to ship).\n\n`DATEADD('month', 3, [Order Date])` → the date 3 months later."],
+  ["dates", "What do `TODAY()` and `NOW()` return?", "`TODAY()` returns today’s **date**; `NOW()` returns the current **date and time**."],
+  ["dates", "What do `YEAR()`, `MONTH()` and `DAY()` return?", "Integers, e.g. `YEAR([Order Date])` = 2025. They are shortcuts for DATEPART."],
+  ["dates", "What does `DATEPARSE` do?", "Turns a **string** into a date using a format you give, e.g. `DATEPARSE(\"MMM yyyy\", [Month])` for “Jan 2025”. `DATE()` also converts simple strings and numbers to dates."],
+  ["dates", "Exam-style: you need a filter that always shows the last 12 months without editing it. Which filter?", "A **relative date** filter: Months > Last **12** months."],
+  ["sort", "How can you sort a view? Give four ways.", "- **Toolbar** sort ascending / descending buttons\n- The **sort icon** on an axis or header\n- **Drag** a header to a new position (manual sort)\n- Right-click the dimension pill > **Sort…**"],
+  ["sort", "What options does the **Sort** dialog on a dimension offer?", "**Data source order**, **Alphabetic**, **Field** (by a measure and aggregation, which need not be in the view), **Manual**, and **Nested**, each ascending or descending."],
+  ["sort", "Computed sort vs manual sort?", "A **computed** sort follows a rule (e.g. by SUM(Sales)) and updates when the data changes. A **manual** sort is an order you dragged or set, and stays fixed."],
+  ["sort", "What is a nested sort?", "Sorting the inner dimension separately **within each** value of the outer dimension, e.g. Sub-Categories sorted by sales within each Category."],
+  ["sort", "Exam-style: Loyalty Tier sorts as Bronze, Gold, Platinum, Silver. How do you fix it?", "Use a **manual** sort (Sort dialog > Manual, or drag the headers), or set the field’s **Default Properties > Sort**."],
+  ["sort", "How do you show grand totals and subtotals?", "**Analysis** > **Totals** > **Show Column Grand Totals**, **Show Row Grand Totals** or **Add All Subtotals**. Or drag **Totals** from the Analytics pane."],
+  ["sort", "How do you move grand totals to the top or left?", "**Analysis** > **Totals** > **Column Totals to Top** or **Row Totals to Left**."],
+  ["sort", "How are grand totals calculated by default?", "With the measure’s **Total Using** setting, which defaults to **Automatic**: a total calculated from the underlying data with the measure’s own aggregation. Change it per pill > **Total Using** (e.g. Sum, Average)."],
+  ["sort", "Exam-style: a crosstab of Sales by Region and Category needs one total per region and one overall total. What do you add?", "**Row Grand Totals** (one total per region row) and **Column Grand Totals** (the overall line at the bottom), via Analysis > Totals."],
+  ["sort", "Can you sort by a measure that isn’t in the view?", "Yes. In the Sort dialog choose **Field** and pick any measure and aggregation, e.g. sort Sub-Category by AVG(Discount)."],
+  ["ref", "What are the three sections of the **Analytics pane**?", "- **Summarize**: Constant Line, Average Line, Median with Quartiles, Box Plot, Totals\n- **Model**: Average with 95% CI, Median with 95% CI, Trend Line, Forecast, Cluster\n- **Custom**: Reference Line, Reference Band, Distribution Band, Box Plot"],
+  ["ref", "How do you add a reference line?", "Drag **Reference Line** (or Average Line, Constant Line) from the Analytics pane onto the view, or right-click an **axis** > **Add Reference Line**. A reference line needs a continuous axis."],
+  ["ref", "What scopes can a reference line have?", "**Entire Table**, **Per Pane** or **Per Cell**."],
+  ["ref", "What values can a reference line use?", "A **constant**, an **aggregation** of a measure (Total, Sum, Minimum, Maximum, Average, Median), or a **parameter**."],
+  ["ref", "Reference line vs reference band vs distribution band?", "**Line**: one value.\n\n**Band**: shades the area between two values.\n\n**Distribution band**: shades ranges based on a distribution, e.g. 60% and 80% of the average, percentiles, quantiles or standard deviations."],
+  ["ref", "How do you edit or remove a reference line?", "Right-click the line (or the axis) > **Edit** or **Remove**. Edit lets you change the label, tooltip, line format and fill."],
+  ["ref", "Which models can a trend line use?", "**Linear, Logarithmic, Exponential, Power, Polynomial.**"],
+  ["ref", "How do you see a trend line’s equation and R-squared?", "Hover the line, or right-click > **Describe Trend Line…** (or Describe Trend Model) to see the equation, R-squared and p-value."],
+  ["ref", "What does a trend line need in the view?", "Fields on both axes that can be read as numbers: two measures, or a **continuous** date and a measure."],
+  ["ref", "What does Forecast need, and what method does it use?", "A **date** (or integer time field) and a **measure**. Tableau uses **exponential smoothing**. Add it from the Analytics pane or **Analysis** > **Forecast** > **Show Forecast**; set the length under **Forecast Options…**"],
+  ["ref", "What does dragging **Cluster** onto a view do?", "Groups marks into clusters with k-means, based on the measures in the view. Drag the cluster pill to the Data pane to save it as a **group**."],
+  ["ref", "Average line vs constant line?", "An **average line** moves with the data (the average of the measure). A **constant line** stays at a fixed value you type, such as a target of 50,000."],
+  ["ref", "Exam-style: a bar chart by Sub-Category needs a line showing average sales, separately for each Category pane. What scope?", "**Per Pane**, with the value AVG(Sales)."],
+  ["ref", "Exam-style: you want shaded areas at 60% and 80% of a target behind each bar. Which analytics object?", "A **distribution band** (as in a bullet graph)."],
+  ["tcalc", "What is a table calculation?", "A calculation done on the **aggregated values in the view**, such as a running total or percent of total. The pill shows a **Δ (triangle)**."],
+  ["tcalc", "List the quick table calculations.", "Running Total, Difference, Percent Difference, Percent of Total, Rank, Percentile, Moving Average, YTD Total, Compound Growth Rate, Year over Year Growth, YTD Growth."],
+  ["tcalc", "How do you add a quick table calculation?", "Right-click a measure pill in the view > **Quick Table Calculation** > choose one."],
+  ["tcalc", "What does **Compute Using** control?", "The direction and scope: **Table (across)**, **Table (down)**, **Table (across then down)**, **Pane (across/down)**, **Cell**, or **Specific Dimensions**."],
+  ["tcalc", "Running Total vs Difference vs Percent Difference?", "- **Running Total**: adds each value to the ones before\n- **Difference**: this value minus the previous one\n- **Percent Difference**: that difference as a % of the previous value"],
+  ["tcalc", "Rank vs Percentile?", "**Rank** gives a position (1, 2, 3…). **Percentile** gives the position as a percentage (0–100%)."],
+  ["tcalc", "Moving Average: what does it show?", "The average of the current value and a number of values before it (by default the previous 2 and the current one). It smooths a noisy line."],
+  ["tcalc", "YTD Total vs YTD Growth vs Year over Year Growth?", "- **YTD Total**: running total that restarts each year\n- **YTD Growth**: this year’s YTD total vs last year’s\n- **Year over Year Growth**: each period vs the same period last year"],
+  ["tcalc", "Exam-style: Percent of Total shows 100% on every row. What is the likely fix?", "Change **Compute Using**. It is computing per **Cell** or in the wrong direction, so each value is its own total. Use Table (down) or the right dimension."],
+  ["tcalc", "How do you edit a quick table calculation in detail?", "Right-click the Δ pill > **Edit Table Calculation…** to change the type, the Compute Using, and where it restarts."],
+  ["tcalc", "How do you remove a table calculation from a pill?", "Right-click the pill > **Clear Table Calculation**."],
+  ["tcalc", "How do you save a quick table calculation as a calculated field?", "**Ctrl+drag** (or drag) the Δ pill into the Data pane. Tableau creates a calculated field with the formula, e.g. `RUNNING_SUM(SUM([Sales]))`."],
+  ["tcalc", "Exam-style: you need each Region’s share of total sales in one bar chart. Which quick table calculation?", "**Percent of Total** on SUM(Sales), computed across the regions (Table across or down, depending on the layout)."],
+  ["bins", "How do you create bins?", "Right-click a **numeric** field > **Create** > **Bins…**, and set the bin size or use **Suggest Bin Size**. The result is a new **discrete dimension** like “Sales (bin)”."],
+  ["bins", "How do you build a histogram?", "Select one measure and choose **Histogram** in Show Me. Tableau creates a bin field, puts it on **Columns**, and puts the **count** of the measure (CNT) on **Rows**."],
+  ["bins", "What does a histogram show?", "How values are **distributed**: how many records fall in each range (bin), e.g. how many orders are between 0–100, 100–200, and so on."],
+  ["bins", "Histogram vs bar chart?", "A **bar chart** compares a measure across categories. A **histogram** shows how often values fall into **numeric ranges** of one measure."],
+  ["bins", "How do you change the size of existing bins?", "Right-click the bin field > **Edit…** and change **Size of bins**. You can also use a parameter as the bin size."],
+  ["bins", "What does a bin label mean, e.g. “100” in Sales (bin) with size 100?", "The **lower edge** of the bin: values from 100 up to (not including) 200."],
+  ["bins", "Exam-style: to see how many orders fall in each 100 USD range of Sales, what do you create?", "**Bins** on Sales with size 100, then a **histogram** (bin on Columns, count on Rows)."],
+  ["bins", "Exam-style: customers’ ages should be grouped into 10-year bands. What do you do?", "Calculate age (e.g. `DATEDIFF('year', [Birth Date], TODAY())`), then create **bins** of size 10 on it."],
+  ["calc", "How do you create a calculated field?", "**Analysis** > **Create Calculated Field…**, or right-click in the Data pane > **Create Calculated Field…**, or right-click a field > **Create** > **Calculated Field…** The editor shows whether the formula is valid and lists functions."],
+  ["calc", "Write a calculation for profit ratio.", "`SUM([Profit]) / SUM([Sales])`\n\nAggregate **before** dividing. `[Profit] / [Sales]` would compute a ratio per row, and the view would then **sum** those ratios, which is wrong."],
+  ["calc", "What does the error “Cannot mix aggregate and non-aggregate arguments” mean?", "You combined a row-level field and an aggregated one, e.g. `[Sales] - SUM([Profit])`. Make both aggregated or both row-level."],
+  ["calc", "Write an IF statement that labels orders with sales over 500 as “Large”.", "`IF [Sales] > 500 THEN \"Large\" ELSE \"Small\" END`\n\nAdd more conditions with `ELSEIF`. Every IF ends with `END`."],
+  ["calc", "What do `IIF` and `CASE` do?", "- `IIF([Profit] > 0, \"Profit\", \"Loss\")`: a short IF\n- `CASE [Region] WHEN \"West\" THEN 1 ELSE 0 END`: compares one field to a list of values"],
+  ["calc", "What do `IFNULL`, `ZN` and `ISNULL` do?", "- `IFNULL([Profit], 0)` replaces null with a value you choose\n- `ZN([Profit])` replaces null with **zero**\n- `ISNULL([Profit])` returns TRUE if the value is null"],
+  ["calc", "Which logical operators can you use?", "`AND`, `OR`, `NOT`, and comparisons `=` (or `==`), `<>` (or `!=`), `<`, `<=`, `>`, `>=`."],
   ["calc", "Name common string functions.", "`LEFT`, `RIGHT`, `MID`, `LEN`, `UPPER`, `LOWER`, `TRIM`, `CONTAINS`, `STARTSWITH`, `ENDSWITH`, `REPLACE`, `SPLIT`, `FIND`. Join strings with `+`."],
+  ["calc", "How do you get the email domain from “anna@example.com”?", "`SPLIT([Email], \"@\", 2)` returns “example.com”, the second part after splitting on @."],
   ["calc", "How do you combine a string and a number in a calculation?", "Convert the number with `STR()`: `[Customer Name] + \" – \" + STR([Quantity])`. Other conversions: `INT()`, `FLOAT()`, `DATE()`."],
-  ["calc", "`DATEPART`, `DATENAME`, `DATETRUNC`: what does each return?", "- `DATEPART('month', [Order Date])` → an **integer** (3)\n- `DATENAME('month', [Order Date])` → a **string** (“March”)\n- `DATETRUNC('month', [Order Date])` → a **date** (1 March 2025)"],
-  ["calc", "What do `DATEDIFF` and `DATEADD` do?", "`DATEDIFF('day', [Order Date], [Ship Date])` → number of days between two dates (days to ship).\n\n`DATEADD('month', 3, [Order Date])` → the date 3 months later."],
-  ["calc", "What do `TODAY()` and `NOW()` return?", "`TODAY()` returns the current **date**; `NOW()` returns the current **date and time**."],
-  ["calc", "`COUNT` vs `COUNTD`?", "`COUNT` counts all non-null values (rows). `COUNTD` counts **distinct** values, e.g. COUNTD([Customer Name]) = number of unique customers."],
-  ["calc", "What is a parameter?", "A **single value** the viewer can choose (a number, date or string) that you use in calculations, filters, reference lines or bins. On its own a parameter does nothing; it must be **referenced** somewhere."],
-  ["calc", "Which data types and allowable values can a parameter have?", "Data types: **Float, Integer, String, Boolean, Date, Date & Time**.\n\nAllowable values: **All**, **List** (fixed or from a field), **Range** (min, max, step size)."],
-  ["calc", "How do you create and show a parameter?", "Data pane menu (or right-click a field) > **Create Parameter…** Then right-click the parameter > **Show Parameter** to display its control."],
-  ["calc", "When should you use a parameter? Give three examples.", "- **Top N** chosen by the viewer (Top 5 / 10 / 20)\n- **Swap measures**: choose Sales, Profit or Quantity in one chart\n- **What-if** analysis, e.g. a target or growth rate on a reference line"],
-  ["calc", "Parameter vs filter?", "A **filter** removes data and can take several values. A **parameter** is one value that can be used **anywhere** (calculations, reference lines, Top N, bins) and isn’t tied to one field."],
-  ["calc", "Exam-style: a manager wants to change the sales target line on a chart from a dropdown. What do you create?", "A **parameter** (the target value), shown as a control, and a **reference line** whose value is that parameter."],
-  ["calc", "What does `ATTR([Field])` return?", "The value if every row in the mark has the **same** value; otherwise an **asterisk (∗)**."],
-
-  // ======== 3.1 FORMATTING ========
-  ["fmt", "How does colour differ for a dimension vs a measure on Color?", "**Discrete dimension** → a **categorical** palette, one colour per member.\n\n**Continuous measure** → a **sequential** (one hue) or **diverging** (two hues, e.g. red/blue around zero) gradient."],
-  ["fmt", "What can you change in **Edit Colors** for a continuous measure?", "Palette, **Stepped Color** (number of steps), **Reversed**, Use Full Color Range, and the start, end and centre values (Advanced)."],
-  ["fmt", "What other options are under the Color button?", "**Opacity**, **Border** colour, **Halo**, and markers for lines."],
-  ["fmt", "How do you format marks as shapes?", "Change the marks type to **Shape**, then drag a dimension onto **Shape**. Click Shape > **Edit Shape…** to choose a palette or your own shapes (saved in My Tableau Repository > Shapes)."],
+  ["calc", "Name common number functions.", "`ROUND([Sales], 2)`, `ABS()`, `CEILING()`, `FLOOR()`, `SQRT()`, `POWER()`, `MIN()` and `MAX()` of two values, and `%` for the remainder."],
+  ["calc", "`COUNT` vs `COUNTD`?", "`COUNT` counts all non-null values. `COUNTD` counts **distinct** values, e.g. `COUNTD([Customer Name])` = number of unique customers."],
+  ["calc", "What does `ATTR([Field])` return?", "The value if every row in the mark has the **same** value; otherwise `*` (an asterisk)."],
+  ["calc", "How do you write a comment in a calculation?", "Start the line with `//`. Tableau ignores the rest of the line."],
+  ["calc", "Is a new calculated field a dimension or a measure?", "It depends on the result: a **number** usually becomes a measure; a **string, date or Boolean** becomes a dimension. You can convert it afterwards."],
+  ["calc", "Where can you use a calculated field after you create it?", "In **every sheet** that uses the same data source. It is saved with the data source in the workbook (and in a `.tds` if you save one)."],
+  ["calc", "Exam-style: you need a field that shows “High” when Discount is at least 20%, otherwise “Normal”. Write it.", "`IF [Discount] >= 0.2 THEN \"High\" ELSE \"Normal\" END`"],
+  ["calc", "Exam-style: Profit has nulls that break a calculation. Which function replaces them with 0?", "`ZN([Profit])` (or `IFNULL([Profit], 0)`)."],
+  ["param", "What is a parameter?", "A **single value** the viewer can choose (a number, date or string) that you use in calculations, filters, reference lines or bins. On its own a parameter does nothing; it must be **referenced** somewhere."],
+  ["param", "Which data types can a parameter have?", "**Float, Integer, String, Boolean, Date** and **Date & Time**."],
+  ["param", "What are the allowable values of a parameter?", "**All** (any value), **List** (fixed values, or values from a field), or **Range** (minimum, maximum and step size)."],
+  ["param", "How do you create and show a parameter?", "Data pane menu (or right-click a field) > **Create Parameter…** Then right-click the parameter > **Show Parameter** to display its control."],
+  ["param", "When should you use a parameter? Give three examples.", "- A **Top N** that the viewer chooses (Top 5 / 10 / 20)\n- **Swap measures**: choose Sales, Profit or Quantity in one chart\n- **What-if** analysis, e.g. a target or growth rate on a reference line"],
+  ["param", "Parameter vs filter?", "A **filter** removes data and can take several values. A **parameter** is one value that can be used **anywhere** (calculations, reference lines, Top N, bins) and isn’t tied to one field or data source."],
+  ["param", "How do you let viewers choose which measure a chart shows?", "Create a String parameter with the list Sales, Profit, Quantity, then a calculation:\n\n`CASE [Choose Measure] WHEN \"Sales\" THEN SUM([Sales]) WHEN \"Profit\" THEN SUM([Profit]) ELSE SUM([Quantity]) END`\n\nUse the calculation in the view and show the parameter."],
+  ["param", "How do you make a Top N filter controlled by a parameter?", "Create an Integer parameter (e.g. range 5–20). In the filter’s **Top** tab, choose **By field**, then pick the parameter in the number drop-down instead of a fixed number."],
+  ["param", "How do you keep a parameter list up to date when the data changes?", "Use **List** > **When workbook opens** > **Add values from** a field, so the list refreshes each time the workbook opens."],
+  ["param", "Name parameter control styles.", "**Type in**, **Slider** (for ranges), **Single value list** and **Compact list** (drop-down)."],
+  ["param", "Can a parameter change when the viewer clicks a mark?", "Yes, with a **parameter action** (Dashboard or Worksheet > **Actions** > Add Action > **Change Parameter**)."],
+  ["param", "Exam-style: a manager wants to change the sales target line on a chart from a drop-down. What do you create?", "A **parameter** for the target value, shown as a control, and a **reference line** whose value is that parameter."],
+  ["param", "Exam-style: TRUE or FALSE? A parameter can hold several selected values at once.", "**False.** A parameter holds **one** value at a time. Use a filter for multiple selections."],
+  ["fmt", "How does colour differ for a dimension vs a measure on Color?", "**Discrete dimension** → a **categorical** palette, one colour per value.\n\n**Continuous measure** → a **sequential** (one hue) or **diverging** (two hues, e.g. orange-blue around zero) gradient."],
+  ["fmt", "What can you change in **Edit Colors** for a continuous measure?", "The palette, **Stepped Color** (number of steps), **Reversed**, **Use Full Color Range**, and in **Advanced** the start, end and centre values."],
+  ["fmt", "What other options are under the Color button?", "**Opacity**, **Border** colour, **Halo**, and **Markers** for lines."],
+  ["fmt", "How do you assign your own colours to each value of a dimension?", "Click the colour legend’s menu > **Edit Colors…**, select a value, and click a colour in the palette. Or set Default Properties > Color on the field."],
+  ["fmt", "How do you format marks as shapes?", "Change the mark type to **Shape**, then drag a dimension onto **Shape**. Click Shape > **Edit Shape…** to choose a palette or your own shapes (saved in My Tableau Repository > Shapes)."],
   ["fmt", "How do you change the size of marks?", "Click **Size** on the Marks card and move the slider, or drag a measure onto Size so marks are sized by value."],
-  ["fmt", "How do you turn on viz animations?", "**Format** > **Animations…**. Set the workbook default or selected sheets: On/Off, **Duration**, and **Style**: Simultaneous or Sequential."],
-  ["fmt", "How do you show or hide a legend?", "Hide: click the legend’s menu > **Hide Card**. Show: **Analysis** > **Legends** > choose the legend, or **Worksheet** > **Show Cards**."],
-  ["fmt", "How do you change fonts for the whole workbook?", "**Format** > **Workbook…** sets fonts (and lines) for all sheets. For one sheet use **Format** > **Font…**"],
-  ["fmt", "Where do you format borders, shading or gridlines?", "**Format** menu > Borders / Shading / Lines, or right-click the view > **Format…** to open the Format pane (Sheet, Rows and Columns tabs)."],
-  ["fmt", "How do you add labels to marks?", "Click **Label** > **Show mark labels**, or drag a field to Label. Options include All, Min/Max, Line Ends, Selected, Highlighted, and **Allow labels to overlap other marks**."],
-  ["fmt", "How do you edit a tooltip?", "Click **Tooltip** on the Marks card. You can insert fields, format text, turn command buttons on/off, and insert another sheet (**Viz in Tooltip**)."],
+  ["fmt", "How do you turn on viz animations?", "**Format** > **Animations…** Set the workbook default or just the selected sheet: On/Off, **Duration**, and **Style**: Simultaneous or Sequential."],
+  ["fmt", "What do animations do in Tableau?", "They move marks smoothly from the old position to the new one when you filter, sort or change the view, so viewers can follow what changed."],
+  ["fmt", "How do you show or hide a legend?", "Hide: legend menu > **Hide Card**. Show: **Analysis** > **Legends** > the legend you want, or **Worksheet** > **Show Cards**."],
+  ["fmt", "How do you change fonts for the whole workbook?", "**Format** > **Workbook…** sets fonts (and lines) for all sheets, titles and tooltips. For one sheet use **Format** > **Font…**"],
+  ["fmt", "Where do you format borders, shading or gridlines?", "**Format** menu > Borders / Shading / Lines, or right-click the view > **Format…** to open the Format pane, with Sheet, Rows and Columns tabs."],
+  ["fmt", "How do you add labels to marks?", "Click **Label** > **Show mark labels**, or drag a field to Label. Options include All, Min/Max, Line Ends, Selected and Highlighted, and **Allow labels to overlap other marks**."],
+  ["fmt", "How do you edit a tooltip?", "Click **Tooltip** on the Marks card. Insert fields, format the text, turn command buttons on or off, and use **Insert** > **Sheets** for a viz in tooltip."],
   ["fmt", "How do you show the title or caption of a worksheet?", "**Worksheet** > **Show Title** / **Show Caption**. Double-click the title to edit it and insert fields."],
-  ["fmt", "What are annotations?", "Notes added to the view: right-click a mark > **Annotate** > **Mark, Point** or **Area**."],
-  ["fmt", "What do Standard, Fit Width, Fit Height and Entire View do?", "Fit options in the toolbar that control how the view fills the window. **Entire View** squeezes everything into the window with no scrolling."],
-
-  // ======== 3.2 DASHBOARDS & STORIES ========
-  ["dash", "How do you add a worksheet to a dashboard?", "In the Dashboard tab’s **Sheets** list, drag the sheet onto the canvas (or double-click it)."],
-  ["dash", "Tiled vs floating objects?", "**Tiled** objects sit in a grid layout and never overlap; they resize with the dashboard.\n\n**Floating** objects can be placed anywhere on top of others at an exact position and size. Hold **Shift** while dragging to switch."],
-  ["dash", "List the dashboard objects.", "**Horizontal** and **Vertical** layout containers, **Text, Image, Web Page, Blank, Navigation** (button to another sheet), **Download** (export button), **Extension**."],
-  ["dash", "What do layout containers do?", "Group objects in a row (horizontal) or column (vertical) so they resize together. Container option **Distribute Contents Evenly** gives equal space. Containers can get a **Show/Hide button**."],
-  ["dash", "What are the three dashboard size options?", "**Fixed size** (a set width and height, e.g. Desktop Browser 1000×800), **Automatic** (fills the window), **Range** (between a minimum and maximum)."],
-  ["dash", "How do you create a dashboard for phones and tablets?", "Click **Device Preview** > choose **Tablet** or **Phone** > **Add Layout**. Each device layout can have its own size and objects. The phone layout is created automatically by default."],
-  ["dash", "Name the six dashboard action types.", "**Filter, Highlight, Go to URL, Go to Sheet, Change Parameter, Change Set Values.** Create them via **Dashboard** > **Actions…** > Add Action."],
-  ["dash", "What three ways can a viewer trigger an action?", "**Hover**, **Select** (click), or **Menu** (a link in the tooltip)."],
-  ["dash", "Filter action: what can happen when the selection is cleared?", "**Keep filtered values**, **Show all values**, or **Exclude all values**."],
-  ["dash", "What is the quickest way to make a sheet filter the rest of the dashboard?", "Select the sheet > click the **Use as Filter** (funnel) icon. This creates a filter action automatically."],
-  ["dash", "What does a URL action do?", "Opens a web page (in a browser or a Web Page object), with field values inserted into the URL, e.g. searching for the selected product."],
-  ["dash", "What does a parameter action do?", "Changes a **parameter’s value** when the viewer selects a mark, e.g. clicking a bar sets the parameter used for a reference line."],
-  ["dash", "How do you add interactive elements such as filters, highlighters and parameter controls to a dashboard?", "Select the sheet on the dashboard > its menu (down arrow) > **Filters**, **Highlighters** or **Parameters** > choose the field."],
-  ["dash", "What is the **data highlighter**?", "A search box that highlights matching marks without filtering anything. On a sheet: right-click a dimension > **Show Highlighter**."],
-  ["dash", "What is a story?", "A sequence of **story points**. Each point holds a worksheet or dashboard with its own filters and selections, so you can walk an audience through findings. Create with **Story** > **New Story**."],
-  ["dash", "How do you save changes to a story point?", "Click **Update** above the story point after changing it, or **Save as New** to make a new point."],
-  ["dash", "Name the story navigator styles.", "**Caption boxes, Numbers, Dots, Arrows only.**"],
+  ["fmt", "What are annotations?", "Notes added to the view: right-click a mark > **Annotate** > **Mark**, **Point** or **Area**."],
+  ["fmt", "What do Standard, Fit Width, Fit Height and Entire View do?", "Fit options on the toolbar that control how the view fills the window. **Entire View** fits everything in the window with no scrolling."],
+  ["fmt", "How do you format numbers in just one view?", "Right-click the pill > **Format…** > choose the numbers format on the Axis or Pane tab. This overrides the default number format for that sheet only."],
+  ["fmt", "Exam-style: a line chart needs labels only on the first and last point of each line. Which label option?", "**Label** > Marks to label: **Line Ends**."],
+  ["dash", "How do you add a worksheet to a dashboard?", "In the **Sheets** list of the Dashboard pane, drag the sheet onto the canvas (or double-click it)."],
+  ["dash", "Tiled vs floating objects?", "**Tiled** objects sit in a grid and never overlap; they resize with the dashboard.\n\n**Floating** objects can be placed anywhere on top of others, at an exact position and size. Hold **Shift** while dragging to switch."],
+  ["dash", "List the dashboard objects.", "**Horizontal** and **Vertical** layout containers, **Text**, **Image**, **Web Page**, **Blank**, **Navigation** (a button to another sheet), **Download** (an export button), **Extension**."],
+  ["dash", "What do layout containers do?", "Group objects in a row (horizontal) or a column (vertical) so they resize together. **Distribute Contents Evenly** gives each item equal space."],
+  ["dash", "How do you let viewers hide and show part of a dashboard?", "Select a layout container > its menu > **Add Show/Hide Button**. The button toggles the container; it works best with a floating container."],
+  ["dash", "What are the three dashboard size options?", "**Fixed size** (e.g. Desktop Browser 1000 × 800), **Automatic** (fills the window), **Range** (between a minimum and maximum)."],
+  ["dash", "How do you create a dashboard for phones and tablets?", "Click **Device Preview** > choose **Tablet** or **Phone** > **Add Layout**. Each device layout can have its own size and objects. A phone layout is created automatically by default."],
+  ["dash", "What does the **Layout** pane let you set?", "The selected item’s **position** and **size**, **border**, **background**, **outer and inner padding**, and the **item hierarchy** that shows how containers are nested."],
+  ["dash", "How do you show a dashboard title?", "**Dashboard** > **Show Title**, or tick **Show dashboard title** at the bottom of the Dashboard pane."],
+  ["dash", "How do you add a filter or parameter control from a sheet to a dashboard?", "Select the sheet on the dashboard > its drop-down menu > **Filters** or **Parameters** > choose the field."],
+  ["dash", "How do you make a sheet fill its space on a dashboard?", "Set the sheet’s fit to **Entire View** (sheet menu > **Fit** > Entire View)."],
+  ["dash", "How do you move a legend so it floats over a chart?", "Drag the legend while holding **Shift**, or select it and choose **Floating** from its menu."],
   ["dash", "Does removing a sheet from a dashboard delete the worksheet?", "**No.** The worksheet stays in the workbook. It is only deleted if you delete the sheet tab itself."],
-  ["dash", "Exam-style: when a user clicks a region in a map, the bar chart should show only that region. Which action?", "A **filter action** with source = map, target = bar chart, run on **Select**."],
-
-  // ======== 3.3 SHARING & EXPORTING ========
-  ["share", "How do you create a packaged workbook?", "**File** > **Save As** > type **Tableau Packaged Workbook (.twbx)**, or **File** > **Export Packaged Workbook…**"],
-  ["share", "What does a `.twbx` include?", "The workbook plus **extracts, local file data** (Excel, CSV), **images** and custom shapes. It does **not** contain live connections to server databases."],
-  ["share", "What free programs can open a `.twbx`?", "**Tableau Reader** (view only, not edit) and Tableau Public Desktop."],
+  ["dash", "What does a **Navigation** button do?", "Takes the viewer to another sheet, dashboard or story when clicked. You can show it as text or an image."],
+  ["dash", "Exam-style: a dashboard must look the same on every screen and never squash the charts. Which size option?", "**Fixed size**."],
+  ["act", "Name the six dashboard action types.", "**Filter**, **Highlight**, **Go to URL**, **Go to Sheet**, **Change Parameter**, **Change Set Values**. Create them via **Dashboard** > **Actions…** > **Add Action**."],
+  ["act", "What three ways can a viewer run an action?", "**Hover**, **Select** (click) or **Menu** (a link in the tooltip)."],
+  ["act", "Filter action: what can happen when the selection is cleared?", "**Keep filtered values**, **Show all values** or **Exclude all values**."],
+  ["act", "What is the quickest way to make a sheet filter the rest of the dashboard?", "Select the sheet > click the **Use as Filter** (funnel) icon. This creates a filter action."],
+  ["act", "What does a highlight action do?", "Highlights related marks in other sheets and dims the rest, **without** removing any data."],
+  ["act", "What does a URL action do?", "Opens a web page in a browser or in a **Web Page** object, with field values inserted into the URL, e.g. a search for the selected product."],
+  ["act", "What does a parameter action do?", "Changes a **parameter’s value** when the viewer selects a mark, e.g. clicking a bar sets the region used in a calculation."],
+  ["act", "What does a set action do?", "Changes the **members of a set** based on the marks the viewer selects, so calculations and colours that use the set update."],
+  ["act", "What is the **data highlighter**?", "A search box that highlights matching marks without filtering anything. On a sheet: right-click a dimension > **Show Highlighter**. On a dashboard: sheet menu > **Highlighters**."],
+  ["act", "Which interactive elements does the exam guide name for viewers?", "**Filters**, the **data highlighter** and **tooltips**, plus dashboard actions (filter, highlight, parameter control, URL)."],
+  ["act", "What is a viz in tooltip?", "A worksheet shown inside another sheet’s tooltip and filtered to the hovered mark. Add it in the Tooltip editor: **Insert** > **Sheets**."],
+  ["act", "Where do you see all the actions in a workbook?", "**Dashboard** > **Actions…** (on a dashboard) or **Worksheet** > **Actions…** (on a sheet)."],
+  ["act", "Exam-style: when a user clicks a region on a map, the bar chart should show only that region. Which action?", "A **filter action**: source = map, target = bar chart, run on **Select**."],
+  ["act", "Exam-style: hovering over a category should make the same category stand out in all charts, without hiding anything. Which action?", "A **highlight action** running on **Hover**."],
+  ["story", "What is a story?", "A sequence of **story points**. Each point holds a worksheet or dashboard with its own filters and selections, so you can walk an audience through findings. Create it with **Story** > **New Story**."],
+  ["story", "How do you add a story point?", "Drag a sheet or dashboard onto the story, then click **Blank** (a new empty point) or **Duplicate** (a copy of the current point) to add the next one."],
+  ["story", "How do you save changes to a story point?", "Click **Update** above the point, or **Save as New** to keep the original and create a new point. **Revert** undoes unsaved changes."],
+  ["story", "Name the story navigator styles.", "**Caption boxes**, **Numbers**, **Dots** and **Arrows only**."],
+  ["story", "How do you add explanatory text to a story point?", "Type in the point’s **caption**, or drag a **Description** text box onto the point from the Story pane."],
+  ["story", "Where do you set the size of a story?", "In the **Story** pane, under **Size**, like a dashboard."],
+  ["story", "Story vs dashboard?", "A **dashboard** shows several views at once. A **story** shows views **one after another** to tell a narrative."],
+  ["story", "Exam-style: you filtered a sheet inside a story point and want to keep that view as the next step without losing the current one. What do you click?", "**Save as New**."],
+  ["share", "How do you create a packaged workbook?", "**File** > **Save As** > **Tableau Packaged Workbook (.twbx)**, or **File** > **Export Packaged Workbook…**"],
+  ["share", "What does a `.twbx` include?", "The workbook plus **extracts**, **local file data** (Excel, CSV), **images** and custom shapes. It does **not** contain data from a live connection to a database server."],
+  ["share", "Which free app opens a `.twbx` without editing it?", "**Tableau Reader**. It can open and interact with packaged workbooks but not edit them."],
   ["share", "How do you export a sheet or dashboard as an image?", "**Worksheet** > **Export** > **Image…** or **Dashboard** > **Export Image…** (PNG, JPEG, BMP, EMF)."],
-  ["share", "How do you save a workbook as a PDF?", "**File** > **Print to PDF…**. Choose the range: **Entire workbook, Active sheet**, or **Selected sheets**, plus paper size and scaling."],
-  ["share", "How do you export to PowerPoint?", "**File** > **Export As PowerPoint…**. Each selected sheet, dashboard or story point becomes an **image** on its own slide."],
-  ["share", "How do you view the data behind a mark?", "Right-click a mark > **View Data…**. The **Summary** tab shows aggregated values in the view; the **Full Data** (underlying) tab shows every row. You can copy or download it."],
-  ["share", "How do you export a sheet’s data?", "**Worksheet** > **Export** > **Data…** (Access/CSV), or **Crosstab to Excel**. Or **Worksheet** > **Copy** > Data / Crosstab / Image."],
-  ["share", "What does **Duplicate as Crosstab** do?", "Creates a new sheet showing the current view as a **text table** of the same data. Right-click the sheet tab or **Worksheet** > Duplicate as Crosstab."],
-  ["share", "How do you publish to Tableau Server or Tableau Cloud?", "**Server** > **Publish Workbook…** Sign in, then choose project, name, tags, **permissions**, which sheets to include, **Show sheets as tabs**, how data sources are published (embedded or separate), and authentication."],
-  ["share", "How do you publish a data source so others can reuse it?", "**Server** > **Publish Data Source** > choose the source. Others then connect to it from Tableau Server/Cloud."],
-  ["share", "What is special about publishing to Tableau Public?", "**File** > Save to Tableau Public. The workbook becomes visible to **everyone** on the internet, and the data must be an **extract**."],
-  ["share", "Exam-style: a colleague needs to reproduce exactly what you see, and they have Tableau Desktop but no access to your files. What do you send?", "A **packaged workbook (.twbx)**."],
-  ["share", "Exam-style: your manager wants the raw rows behind the 2025 bar, opened in Excel. Fastest way?", "Right-click the bar > **View Data** > **Full Data** tab > Download, or Worksheet > Export > Crosstab to Excel."],
-
-  // ======== 4.1 DIMENSIONS & MEASURES ========
-  ["dimm", "What kind of information do dimensions usually contain?", "**Qualitative / categorical** values: names, categories, dates, places, IDs. They **slice** the data and set the level of detail."],
-  ["dimm", "What kind of information do measures usually contain?", "**Quantitative**, numeric values you can calculate with: Sales, Profit, Quantity. Measures are **aggregated** by default."],
-  ["dimm", "What happens when you put a dimension vs a measure on Rows?", "A **dimension** creates **headers** (one row per member).\n\nA **measure** creates an **axis** and is aggregated (e.g. SUM(Sales))."],
-  ["dimm", "Is every number a measure?", "No. Numbers like **Postal Code, Order ID, Year** are labels, not quantities. Convert them to dimensions so Tableau doesn’t sum them."],
-  ["dimm", "What are **Measure Names** and **Measure Values**?", "Fields Tableau creates. **Measure Values** holds the values of several measures in one field; **Measure Names** holds their names. Used for crosstabs with many measures and combined axes."],
-  ["dimm", "Exam-style: you drag Postal Code into the view and see one huge number. What went wrong?", "Postal Code is treated as a **measure** and was **summed**. Convert it to a **dimension** (and set a geographic role)."],
-
-  // ======== 4.2 DISCRETE & CONTINUOUS ========
+  ["share", "How do you save a workbook as a PDF?", "**File** > **Print to PDF…** Choose **Entire workbook**, **Active sheet** or **Selected sheets**, plus paper size and scaling."],
+  ["share", "How do you export to PowerPoint?", "**File** > **Export As PowerPoint…** Each selected sheet, dashboard or story point becomes an **image** on its own slide."],
+  ["share", "How do you open the underlying data of a view?", "Select marks > **View Data** in the tooltip, or **Analysis** > **View Data**, or right-click the view > **View Data**. The Data pane and Data Source page also have View Data icons."],
+  ["share", "What tabs does the View Data window show?", "A **Summary** tab with the aggregated values in the view, and a tab per **table** with the underlying rows (or **Full Data** for a single-table source). Use **Show Fields** to add columns."],
+  ["share", "How do you export the underlying data?", "In View Data, click **Download** (CSV, all rows). Or **Worksheet** > **Export** > **Data…**, **Worksheet** > **Export** > **Crosstab to Excel**, or **Worksheet** > **Copy** > Data / Crosstab / Image."],
+  ["share", "What does **Duplicate as Crosstab** do?", "Creates a new sheet that shows the current view as a **text table**. Right-click the sheet tab, or **Worksheet** > **Duplicate as Crosstab**."],
+  ["share", "How do you publish a workbook to Tableau Server or Tableau Cloud?", "**Server** > **Publish Workbook…** Sign in, then choose the project, name, tags, **permissions**, which sheets to include, **Show sheets as tabs**, how data sources are published (embedded or separate) and authentication."],
+  ["share", "How do you publish a data source so others can reuse it?", "**Server** > **Publish Data Source** > choose the source. Others then connect to it on Tableau Server or Cloud."],
+  ["share", "What is special about saving to Tableau Public?", "The workbook becomes visible to **everyone** on the internet, and its data must be an **extract**."],
+  ["share", "Exam-style: a colleague needs to open exactly what you see. They have Tableau Desktop but can’t reach your files. What do you send?", "A **packaged workbook (.twbx)**."],
+  ["share", "Exam-style: your manager wants the rows behind the 2025 bar in Excel. What is the fastest way?", "Right-click the bar > **View Data** > the table (Full Data) tab > **Download**, or **Worksheet** > **Export** > **Crosstab to Excel**."],
+  ["share", "Exam-style: you need every dashboard of a workbook in one file for a printed report. What do you use?", "**File** > **Print to PDF** with **Entire workbook** (or Selected sheets)."],
+  ["dimm", "What information do dimensions usually contain?", "**Qualitative** values: names, categories, dates, places, IDs. They **slice** the data and set the level of detail of the view."],
+  ["dimm", "What information do measures usually contain?", "**Quantitative**, numeric values you can calculate with: Sales, Profit, Quantity. Measures are **aggregated** in the view (SUM by default)."],
+  ["dimm", "What happens when you put a dimension vs a measure on Rows?", "A **dimension** creates **headers** (one row per value).\n\nA **measure** creates an **axis** and is aggregated, e.g. SUM(Sales)."],
+  ["dimm", "Is every number a measure?", "No. Numbers like **Postal Code**, **Order ID** or **Row ID** are labels, not quantities. Convert them to dimensions so Tableau doesn’t add them up."],
+  ["dimm", "How does Tableau decide whether a field is a dimension or a measure?", "When you connect, numbers usually become measures; text, dates and Booleans become dimensions. You can convert a field either way afterwards."],
+  ["dimm", "What are **Measure Names** and **Measure Values**?", "Generated fields. **Measure Values** holds the values of several measures in one field; **Measure Names** holds their names. Used for crosstabs with many measures and for combined axes."],
+  ["dimm", "Can you use a measure as a dimension?", "Yes: right-click > **Convert to Dimension** (e.g. Discount levels 0%, 10%, 20% as categories). Each distinct value becomes a header."],
+  ["dimm", "Exam-style: you drag Postal Code into the view and get one huge number. What went wrong?", "Postal Code is treated as a **measure** and was **summed**. Convert it to a **dimension** (and give it a geographic role)."],
+  ["dimm", "Exam-style: which TWO fields in Superstore are usually measures? Sales, Region, Quantity, Order Date.", "**Sales** and **Quantity**. Region and Order Date are dimensions."],
   ["disc", "What colour are discrete and continuous pills?", "[[Discrete]] = **blue**. {{Continuous}} = **green**.\n\nColour shows discrete vs continuous, **not** dimension vs measure."],
-  ["disc", "How are discrete fields displayed in a view?", "As **headers** (labels) on Rows/Columns, as a **categorical** colour legend, and as a **list** of values in a filter."],
+  ["disc", "How are discrete fields displayed in a view?", "As **headers** (labels) on Rows and Columns, as a **categorical** colour legend, and as a **list** of values in a filter."],
   ["disc", "How are continuous fields displayed in a view?", "As an **axis**, as a colour **gradient**, and as a **range slider** in a filter."],
   ["disc", "Can a dimension be continuous, or a measure discrete?", "Yes. A **continuous date** is a continuous dimension. A measure set to **Discrete** becomes headers (blue) instead of an axis."],
-  ["disc", "Discrete date parts vs continuous date values?", "**Date parts** (discrete, blue): YEAR, QUARTER, MONTH… each part is a separate category; all Januaries combine.\n\n**Date values** (continuous, green): truncated dates on a timeline, e.g. January 2024 and January 2025 are separate points."],
-  ["disc", "In a date pill’s menu, which half gives date parts and which gives date values?", "The **upper** group (Year, Quarter, Month… without a year attached) = **date parts** (discrete). The **lower** group (e.g. “May 2025”) = **date values** (continuous). **Exact Date** is the full value."],
-  ["disc", "What happens when you change a pill from discrete to continuous?", "Headers change to an **axis** (and vice versa). The pill changes from blue to green."],
+  ["disc", "What happens when you change a pill from discrete to continuous?", "Headers change to an **axis** (and back). The pill changes from blue to green."],
+  ["disc", "How do you switch a field between discrete and continuous?", "Right-click the pill or the field > **Discrete** or **Continuous** (in the Data pane: **Convert to Discrete / Continuous**)."],
+  ["disc", "Discrete date parts vs continuous date values: which shows each year separately?", "**Continuous date values** (green): January 2024 and January 2025 are separate points. **Date parts** (blue) combine all Januaries into one header."],
   ["disc", "Exam-style: you want to compare sales in each month across all years to see seasonality. Discrete or continuous month?", "**Discrete** [[MONTH(Order Date)]]: 12 headers, each combining that month from all years."],
-
-  // ======== 4.3 AGGREGATION ========
-  ["agg", "Why does Tableau aggregate measures?", "A data source can have thousands of rows, but a view shows **one mark per combination of dimension members** in the view. Tableau aggregates measures (SUM by default) to that level of detail."],
+  ["disc", "Exam-style: a continuous measure on Color gives a gradient. What does a discrete dimension on Color give?", "A **categorical** palette with a separate colour for each value."],
+  ["disc", "Exam-style: you need a filter with a slider for Sales. Discrete or continuous?", "**Continuous**. Continuous fields give range sliders; discrete fields give lists of values."],
+  ["agg", "Why does Tableau aggregate measures?", "A data source can have thousands of rows, but a view shows **one mark per combination of the dimension values** in the view. Tableau aggregates the measures (SUM by default) to that level of detail."],
+  ["agg", "What is the default aggregation for measures?", "**SUM.** You can change it per pill (right-click > **Measure (Sum)** > Average, Median, Count…), or for every new view in **Default Properties** > **Aggregation**."],
+  ["agg", "Which aggregations can you choose for a measure?", "Sum, Average, Median, Count, Count (Distinct), Minimum, Maximum, Percentile, Std. Dev, Std. Dev (Pop.), Variance, Variance (Pop.), and Attribute or Dimension."],
   ["agg", "How does an aggregated measure change when you add a dimension to the view?", "The view becomes **more detailed**: there are more marks, and each mark aggregates **fewer rows**. SUM(Sales) by Region becomes SUM(Sales) for each Region **and** Category."],
-  ["agg", "What is the default aggregation for measures, and how do you change it?", "**SUM**. Change it in the view by right-clicking the pill > **Measure (Sum)** > Average, Median, Count, Count (Distinct), Minimum, Maximum, Std. dev, Variance, Percentile… or for every new view via Default Properties > Aggregation."],
+  ["agg", "What sets the level of detail of a view?", "The **dimensions** in the view: on Rows, Columns, and the Marks card (Color, Size, Label, Detail, Shape, Path). A dimension only on the Filters shelf does **not** change the level of detail."],
   ["agg", "What does disaggregating measures do?", "**Analysis** > untick **Aggregate Measures**. Tableau draws **one mark per row** of data. Useful for scatter plots of individual records."],
-  ["agg", "What sets the level of detail of a view?", "The **dimensions** in the view: on Rows, Columns, and the Marks card (Color, Size, Label, Detail, Shape, Path). Dimensions only on the Filters shelf do **not** change the level of detail."],
-  ["agg", "Where can you see how many marks are in the view?", "The **status bar** at the bottom left, e.g. “48 marks, 12 rows by 4 columns, SUM(Sales): 2,297,201”."],
-  ["agg", "Exam-style: a view shows SUM(Sales) with no dimensions. How many marks are there?", "**One** mark: the total of all sales in the data (after filters)."],
-  ["agg", "What is the Tableau **order of operations** for filters and calculations?", "1. Extract filters\n2. Data source filters\n3. Context filters\n4. Sets, conditional & Top N filters, FIXED LOD\n5. Dimension filters\n6. Data blending, INCLUDE/EXCLUDE LOD\n7. Measure filters\n8. Forecasts, table calculations, totals\n9. Table calculation filters"],
-  ["agg", "Why does a dimension filter not change a Top N filter’s result?", "**Top N** (step 4) runs **before** dimension filters (step 5). Promote the dimension filter to **context** (step 3) to make Top N respect it."],
-  ["agg", "Why does a table calculation like Percent of Total not change when you filter with a table calc filter?", "Table calculation filters run **last**: they only **hide** marks, so the percentages are still computed on all the data."],
-];
+  ["agg", "Exam-style: a view shows SUM(Sales) with no dimensions. How many marks are there?", "**One** mark: the total of all sales left after filters."],
+  ["agg", "Exam-style: you add Segment (3 values) to Color on a bar chart of SUM(Sales) by Region (4 values). How many marks?", "**12** (4 regions × 3 segments). Each mark sums fewer rows."],
+  ["agg", "What is the default aggregation of a dimension used as an attribute?", "**ATTR**: it shows the value if all rows in a mark share it, otherwise `*` (an asterisk)."],
+  ["agg", "AVG(Profit) by Region vs SUM(Profit) by Region: what changes?", "Same marks, different number per mark: **SUM** adds all rows in the region; **AVG** divides that by the number of rows."],
+  ["mock", "Exam-style: which file type contains both the workbook and its extract?\n- A. .twb\n- B. .twbx\n- C. .tds\n- D. .hyper", "**B. .twbx.** A `.twb` has no data, a `.tds` is data source metadata, and a `.hyper` is only the extract."],
+  ["mock", "Exam-style: two tables are at different levels of detail. Which way of combining them avoids duplicated values?\n- A. Inner join\n- B. Full outer join\n- C. Relationship\n- D. Union", "**C. Relationship.** Tableau queries each table at its own level of detail."],
+  ["mock", "Exam-style: which TWO can you do on the Data Source page? (Choose 2)\n- A. Pivot columns\n- B. Add a reference line\n- C. Add a data source filter\n- D. Create a story", "**A and C.** Reference lines and stories are made in worksheets and stories."],
+  ["mock", "Exam-style: you want to show “NY” as “New York” in every view without changing the data. What do you use?\n- A. Group\n- B. Alias\n- C. Set\n- D. Calculated field", "**B. Alias.** It changes how a value is displayed."],
+  ["mock", "Exam-style: which pill colour means a field is continuous?\n- A. Blue\n- B. Green\n- C. Grey\n- D. Orange", "**B. Green.** Blue is discrete; grey marks a context filter."],
+  ["mock", "Exam-style: which chart needs at least two measures and no dimension?\n- A. Bar chart\n- B. Scatter plot\n- C. Pie chart\n- D. Highlight table", "**B. Scatter plot** (one measure on each axis)."],
+  ["mock", "Exam-style: a Top 10 filter on customers ignores a State filter. What do you do with the State filter?\n- A. Make it a measure filter\n- B. Add it to context\n- C. Make it a table calculation filter\n- D. Show it as a slider", "**B. Add it to context**, so it runs before the Top N filter."],
+  ["mock", "Exam-style: which is a table calculation?\n- A. COUNTD\n- B. Percent of Total\n- C. DATEDIFF\n- D. IFNULL", "**B. Percent of Total.** The others are ordinary functions in calculated fields."],
+  ["mock", "Exam-style: which object lets a viewer change a value used in a calculation?\n- A. Set\n- B. Group\n- C. Parameter\n- D. Bin", "**C. Parameter.**"],
+  ["mock", "Exam-style: which TWO create a group? (Choose 2)\n- A. Select headers and click the paperclip\n- B. Right-click a dimension > Create > Group\n- C. Drag a field to Detail\n- D. Add a reference band", "**A and B.** You can also select marks and use the paperclip in the tooltip."],
+  ["mock", "Exam-style: what does Tableau create when you choose Histogram in Show Me with Quantity selected?\n- A. A set\n- B. A bin field\n- C. A group\n- D. A parameter", "**B. A bin field** (Quantity (bin)) on Columns, with the count on Rows."],
+  ["mock", "Exam-style: which action type changes the members of a set?\n- A. Filter\n- B. Highlight\n- C. Change Set Values\n- D. Go to URL", "**C. Change Set Values** (a set action)."],
+  ["mock", "Exam-style: which is NOT a dashboard size option?\n- A. Fixed size\n- B. Automatic\n- C. Range\n- D. Proportional", "**D. Proportional.** The options are Fixed size, Automatic and Range."],
+  ["mock", "Exam-style: which TWO formats can you export a dashboard to directly from Tableau Desktop? (Choose 2)\n- A. PDF\n- B. PowerPoint\n- C. Word\n- D. MP4", "**A and B.** File > Print to PDF, and File > Export As PowerPoint. Images are also possible."],
+  ["mock", "Exam-style: you add Category to a view of SUM(Sales) by Region. What happens to the SUM(Sales) values?\n- A. They stay the same\n- B. They split into smaller values per Region and Category\n- C. They become averages\n- D. They turn into a table calculation", "**B.** Adding a dimension makes the view more detailed, so each mark aggregates fewer rows."],
+  ["mock", "Exam-style: which is a discrete date part?\n- A. MONTH(Order Date) shown as May 2025\n- B. MONTH(Order Date) shown as May, combining all years\n- C. Exact Date\n- D. DATETRUNC on a green pill", "**B.** A date part combines the same month from every year."],
+  ["mock", "Exam-style: which filter runs FIRST?\n- A. Context filter\n- B. Dimension filter\n- C. Data source filter\n- D. Measure filter", "**C. Data source filter** (only extract filters run earlier)."],
+  ["mock", "Exam-style: a measure in a dual-axis chart needs its own mark type. Where do you change it?\n- A. Its own tab on the Marks card\n- B. The All tab\n- C. Format > Workbook\n- D. The Analytics pane", "**A.** Each measure in a dual-axis chart has its own Marks card tab."],
+  ["mock", "Exam-style: which TWO are geographic roles in Tableau? (Choose 2)\n- A. ZIP Code/Postcode\n- B. Street address\n- C. Country/Region\n- D. Time zone", "**A and C.** Tableau doesn’t geocode street addresses or time zones."],
+  ["mock", "Exam-style: what does Data Interpreter help with?\n- A. Writing calculations\n- B. Cleaning messy Excel, CSV, PDF or Google Sheets files\n- C. Choosing chart types\n- D. Publishing to Tableau Server", "**B.**"],
+  ["mock", "Exam-style: which sort keeps the order when the data changes, because it follows a rule?\n- A. Manual sort\n- B. Computed sort\n- C. Data source order\n- D. Dragging headers", "**B. Computed sort**, e.g. by SUM(Sales) descending."],
+  ["mock", "Exam-style: in View Data, which tab shows the aggregated values that are in the view?\n- A. Summary\n- B. Full Data\n- C. Details\n- D. Marks", "**A. Summary.** The table tabs (or Full Data) show the underlying rows."],
+  ["mock", "Exam-style: which option makes a filter card list only values still possible after other filters?\n- A. All values in database\n- B. Only relevant values\n- C. Show Apply button\n- D. Include null values", "**B. Only relevant values.**"],
+  ["mock", "Exam-style: which TWO apply to a live connection? (Choose 2)\n- A. Data is always current\n- B. Works offline\n- C. Speed depends on the source database\n- D. Data is stored in a .hyper file", "**A and C.** Working offline and .hyper files belong to extracts."],
+].map(c => ({ id: c[0] + "-" + hash(c[1]), deck: c[0], q: c[1], a: c[2] }));
 
-const _counts = {};
-const CARDS = RAW.map(c => {
-  _counts[c[0]] = (_counts[c[0]] || 0) + 1;
-  return { id: c[0] + "-" + _counts[c[0]], deck: c[0], q: c[1], a: c[2] };
-});
 const deckById = Object.fromEntries(DECKS.map(d => [d.id, d]));
-const KEY = "tableau-dtf-flashcards-v1";
-
+const KEY = "tableau-flashcards-v2";
 let store = { known: {}, decks: null };
 try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s && typeof s === "object") store = Object.assign(store, s); } catch (e) {}
 function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} }
 
 const state = {
   decks: new Set(Array.isArray(store.decks) && store.decks.length ? store.decks.filter(d => deckById[d]) : DECKS.map(d => d.id)),
-  shuffle: false, missedOnly: false, view: "study",
-  order: [], pos: 0, flipped: false,
+  shuffle: false, missedOnly: false, view: "study", order: [], pos: 0, flipped: false,
 };
 if (!state.decks.size) DECKS.forEach(d => state.decks.add(d.id));
+// Decks added since a visitor's last visit: include them if that visitor was studying everything.
+{
+  const seen = Array.isArray(store.seen) ? store.seen : DECKS.map(d => d.id);
+  if (seen.every(id => !deckById[id] || state.decks.has(id))) DECKS.forEach(d => { if (!seen.includes(d.id)) state.decks.add(d.id); });
+  store.seen = DECKS.map(d => d.id);
+  if (store.decks) store.decks = [...state.decks];
+  save();
+}
 
+const $ = id => document.getElementById(id);
 function esc(s) { return s.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch])); }
 function inline(s) {
-  return esc(s)
-    .replace(/`([^`]+)`/g, "<code>$1</code>")
-    .replace(/\[\[([^\]]+)\]\]/g, '<span class="pill blue">$1</span>')
-    .replace(/\{\{([^}]+)\}\}/g, '<span class="pill green">$1</span>')
-    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  return esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\[\[([^\]]+)\]\]/g, '<span class="pill b">$1</span>')
+    .replace(/\{\{([^}]+)\}\}/g, '<span class="pill g">$1</span>')
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").replace(/\*([^*]+)\*/g, "<em>$1</em>");
 }
 function render(text) {
   return text.split(/\n\n/).map(block => {
     const lines = block.split("\n");
     if (lines.every(l => l.startsWith("- "))) return "<ul>" + lines.map(l => "<li>" + inline(l.slice(2)) + "</li>").join("") + "</ul>";
-    if (lines.length === 1 && /^`[^`]+`$/.test(lines[0])) return '<span class="formula">' + esc(lines[0].slice(1, -1)) + "</span>";
+    if (lines.length === 1 && /^`[^`]+`$/.test(lines[0])) return '<code class="formula">' + esc(lines[0].slice(1, -1)) + "</code>";
     return "<p>" + lines.map(inline).join("<br>") + "</p>";
   }).join("");
 }
-const isExamStyle = q => q.startsWith("Exam-style:");
-function qText(q) { return isExamStyle(q) ? q.slice(11).trim() : q; }
-const colorOf = d => "var(--c-d" + d.d + ")";
+const isExam = q => q.startsWith("Exam-style:");
+// Question text without the tag, split into the stem and any answer options.
+function qparts(q) {
+  const lines = (isExam(q) ? q.slice(11).trim() : q).split("\n");
+  const stem = lines.filter(l => !l.startsWith("- ")).join(" ");
+  return { stem: stem.charAt(0).toUpperCase() + stem.slice(1), opts: lines.filter(l => l.startsWith("- ")).map(l => l.slice(2)) };
+}
+function qhtml(q, cls) {
+  const p = qparts(q);
+  const opts = p.opts.length ? '<ul class="qopts">' + p.opts.map(o => "<li>" + inline(o) + "</li>").join("") + "</ul>" : "";
+  return '<div class="' + cls + '">' + inline(p.stem) + "</div>" + opts;
+}
+const deckLabel = (d, q) => '<span><span class="deck">' + esc(d.name) + "</span>" + (isExam(q) ? '<span class="xs">Exam-style question</span>' : "") + "</span>";
+const cardsOf = id => CARDS.filter(c => c.deck === id);
+const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
 
+function setDecks(ids) {
+  state.decks = new Set(ids.length ? ids : DECKS.map(d => d.id));
+  store.decks = [...state.decks]; save(); drawDecks(); rebuild(false);
+}
+
+/* ---------- bullet graph: one row per deck group, pass mark as a reference line ---------- */
+const PASS = 48;
+function drawChart() {
+  const box = $("chart");
+  box.innerHTML = GROUPS.map((g, gi) => {
+    const cs = CARDS.filter(c => g.decks.includes(c.deck));
+    const k = cs.filter(c => store.known[c.id] === true).length, a = cs.filter(c => store.known[c.id] === false).length;
+    const pk = cs.length ? k / cs.length * 100 : 0, pa = cs.length ? a / cs.length * 100 : 0;
+    const label = g.name.replace(/^\d · /, "");
+    const num = /^\d/.test(g.name) ? "Domain " + g.name[0] + (g.weight ? " · " + g.weight : "") : plural(cs.length, "card");
+    return '<button class="brow" data-g="' + gi + '" style="--c: var(--d' + gi + ')" aria-label="' + esc(g.name) + ": " + Math.round(pk) + '% known. Study this group.">' +
+      '<span class="blab">' + esc(label) + "<small>" + esc(num) + "</small></span>" +
+      '<span class="track"><span class="k" style="width:' + pk.toFixed(1) + '%"></span><span class="a" style="left:' + pk.toFixed(1) + "%;width:" + pa.toFixed(1) + '%"></span></span>' +
+      '<span class="bpct">' + Math.round(pk) + "%</span></button>";
+  }).join("");
+  // one dashed reference line through all rows, at the pass mark
+  const t = box.querySelector(".track");
+  if (t) {
+    const x = t.offsetLeft + t.offsetWidth * PASS / 100;
+    box.insertAdjacentHTML("beforeend", '<span class="passline" style="left:' + x + 'px"></span>');
+  }
+  box.querySelectorAll(".brow").forEach(b => b.onclick = () => { state.view = "study"; syncView(); setDecks(GROUPS[+b.dataset.g].decks); });
+}
+window.addEventListener("resize", () => drawChart());
+
+/* ---------- deck list ---------- */
+const CHECK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.3l2.3 2.2L9.5 3.7" fill="none" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function drawDecks() {
+  $("groups").innerHTML = GROUPS.map(g =>
+    '<div class="group"><h3><button class="gname" data-g="' + GROUPS.indexOf(g) + '" title="Study only this group">' + esc(g.name) + "</button>" + (g.weight ? '<span class="gw">' + g.weight + "</span>" : "") + "</h3>" + g.decks.map(id => {
+      const d = deckById[id], cs = cardsOf(id), k = cs.filter(c => store.known[c.id] === true).length, on = state.decks.has(id);
+      return '<div class="row" style="--c: var(--c-' + id + ')">' +
+        '<button class="toggle" data-id="' + id + '" aria-pressed="' + on + '"><span class="box">' + CHECK + '</span><span class="dname">' + esc(d.name) + '</span><span class="dcount" title="' + k + " of " + cs.length + ' known">' + (k ? k + "/" : "") + cs.length + "</span></button>" +
+        '<button class="only" data-only="' + id + '" aria-label="Study only ' + esc(d.name) + '">Only</button></div>';
+    }).join("") + "</div>").join("");
+  $("groups").querySelectorAll(".toggle").forEach(b => b.onclick = () => {
+    const id = b.dataset.id, s = new Set(state.decks);
+    s.has(id) ? s.delete(id) : s.add(id);
+    if (!s.size) { state.decks = s; store.decks = []; save(); drawDecks(); rebuild(false); return; }
+    setDecks([...s]);
+  });
+  $("groups").querySelectorAll(".only").forEach(b => b.onclick = () => setDecks([b.dataset.only]));
+  $("groups").querySelectorAll(".gname").forEach(b => b.onclick = () => setDecks(GROUPS[+b.dataset.g].decks));
+  const n = state.decks.size;
+  $("decksum").textContent = n === DECKS.length ? "All " + DECKS.length + " decks" : plural(n, "deck") + " selected";
+  drawChart();
+}
+
+/* ---------- study ---------- */
 function pool() { return CARDS.filter(c => state.decks.has(c.deck) && (!state.missedOnly || store.known[c.id] === false)); }
 function rebuild(keepCurrent) {
   const cur = state.order[state.pos];
-  let ids = pool().map(c => c.id);
+  const ids = pool().map(c => c.id);
   if (state.shuffle) for (let i = ids.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [ids[i], ids[j]] = [ids[j], ids[i]]; }
   state.order = ids;
   const idx = keepCurrent ? ids.indexOf(cur) : -1;
-  state.pos = idx >= 0 ? idx : 0;
-  state.flipped = false;
+  state.pos = idx >= 0 ? idx : 0; state.flipped = false;
   draw();
 }
-const $ = id => document.getElementById(id);
-function setDecks(ids) { state.decks = new Set(ids); store.decks = [...state.decks]; save(); drawChips(); rebuild(false); }
-
-function drawChips() {
-  const box = $("decks");
-  box.innerHTML = "";
-  const allOn = state.decks.size === DECKS.length;
-  const top = document.createElement("div"); top.className = "group";
-  const all = document.createElement("button");
-  all.className = "chip"; all.type = "button";
-  all.setAttribute("aria-pressed", String(allOn));
-  all.innerHTML = 'All cards <span class="n">' + CARDS.length + "</span>";
-  all.onclick = () => setDecks(DECKS.map(d => d.id));
-  top.appendChild(all);
-  box.appendChild(top);
-  DOMAINS.forEach(dom => {
-    const g = document.createElement("div"); g.className = "group";
-    g.style.setProperty("--c", "var(--c-d" + dom.n + ")");
-    const decks = DECKS.filter(d => d.d === dom.n);
-    const lab = document.createElement("button");
-    lab.type = "button"; lab.className = "rowlabel";
-    lab.title = "Study only this domain";
-    lab.innerHTML = esc(dom.name) + (dom.weight ? " · <b>" + dom.weight + "</b>" : "");
-    lab.onclick = () => setDecks(decks.map(d => d.id));
-    g.appendChild(lab);
-    decks.forEach(d => {
-      const b = document.createElement("button");
-      b.className = "chip"; b.type = "button";
-      const on = !allOn && state.decks.has(d.id);
-      b.setAttribute("aria-pressed", String(on));
-      const n = CARDS.filter(c => c.deck === d.id).length;
-      b.innerHTML = '<span class="dot"></span>' + esc(d.name) + ' <span class="n">' + n + "</span>";
-      b.onclick = () => {
-        if (allOn) state.decks = new Set([d.id]);
-        else if (state.decks.has(d.id)) { state.decks.delete(d.id); if (!state.decks.size) DECKS.forEach(x => state.decks.add(x.id)); }
-        else state.decks.add(d.id);
-        store.decks = [...state.decks]; save(); drawChips(); rebuild(false);
-      };
-      g.appendChild(b);
-    });
-    box.appendChild(g);
-  });
-}
-
 function drawProgress() {
   const inDecks = CARDS.filter(c => state.decks.has(c.deck));
-  const k = inDecks.filter(c => store.known[c.id] === true).length;
-  const a = inDecks.filter(c => store.known[c.id] === false).length;
-  const n = inDecks.length;
-  $("pcount").textContent = state.view === "study" && state.order.length ? "Card " + (state.pos + 1) + " of " + state.order.length : state.order.length + " cards";
-  $("pstat").textContent = k + " known · " + a + " to review · " + (n - k - a) + " not seen";
+  const k = inDecks.filter(c => store.known[c.id] === true).length, a = inDecks.filter(c => store.known[c.id] === false).length, n = inDecks.length;
+  $("pcount").innerHTML = state.view === "study" && state.order.length ? "Card <b>" + (state.pos + 1) + "</b> of " + state.order.length : plural(state.order.length, "card");
+  $("pstat").textContent = k + " known, " + a + " to review, " + (n - k - a) + " not seen";
   $("bk").style.width = (n ? k / n * 100 : 0) + "%";
   $("ba").style.width = (n ? a / n * 100 : 0) + "%";
-  $("missed").textContent = "Only “review again” (" + a + ")";
+  $("missed").textContent = "Review again only (" + a + ")";
 }
-
+function emptyState() {
+  if (!state.decks.size) return '<div class="empty"><h2>No decks selected</h2><p>Choose at least one deck to start studying.</p><button class="btn" id="e-all">Select all decks</button></div>';
+  return '<div class="empty"><h2>Nothing to review here</h2><p>None of the cards in these decks are marked “review again”.</p><button class="btn" id="e-show">Show all cards</button></div>';
+}
+function wireEmpty() {
+  const a = $("e-all"), s = $("e-show");
+  if (a) a.onclick = () => setDecks([]);
+  if (s) s.onclick = () => { state.missedOnly = false; $("missed").setAttribute("aria-pressed", "false"); rebuild(false); };
+}
 function drawStudy() {
   const stage = $("stage");
-  if (!state.order.length) {
-    stage.innerHTML = '<div class="empty"><h2>Nothing to review here</h2><p>You have no cards marked “review again” in these decks.</p><button class="btn" id="showall">Show all cards</button></div>';
-    $("showall").onclick = () => { state.missedOnly = false; $("missed").setAttribute("aria-pressed", "false"); rebuild(false); };
-    return;
-  }
-  const card = CARDS.find(c => c.id === state.order[state.pos]);
-  const d = deckById[card.deck];
-  const mark = store.known[card.id];
-  const status = mark === true ? "Known" : mark === false ? "Review again" : "";
-  const tag = isExamStyle(card.q) ? '<span class="tag">Exam-style question</span>' : "";
+  if (!state.order.length) { stage.innerHTML = emptyState(); wireEmpty(); return; }
+  const card = CARDS.find(c => c.id === state.order[state.pos]), d = deckById[card.deck], m = store.known[card.id];
+  const tag = m === true ? '<span class="tag k">Known</span>' : m === false ? '<span class="tag a">Review again</span>' : "";
   stage.innerHTML =
-    '<div class="card' + (state.flipped ? " flipped" : "") + '" id="card" tabindex="0" role="button" aria-label="Flashcard, ' + (state.flipped ? "answer side" : "question side") + '. Press to flip." style="--c: ' + colorOf(d) + '">' +
+    '<div class="card' + (state.flipped ? " flipped" : "") + '" id="card" tabindex="0" role="button" aria-label="Flashcard, ' + (state.flipped ? "answer" : "question") + ' side. Press Space to flip." style="--c: var(--c-' + d.id + ')">' +
       '<div class="face front" aria-hidden="' + state.flipped + '">' +
-        '<div class="facehead"><span class="deck">' + esc(d.name) + '</span><span class="num">' + (status ? status + " · " : "") + (state.pos + 1) + "/" + state.order.length + "</span></div>" +
-        tag + '<div class="q">' + inline(qText(card.q)) + "</div>" +
-        '<div class="hint">Tap the card or press Space to see the answer</div>' +
+        '<div class="fhead">' + deckLabel(d, card.q) + tag + "</div>" +
+        '<div class="qwrap">' + qhtml(card.q, "q") + "</div>" +
+        '<div class="hint">Click the card or press Space to reveal the answer</div>' +
       "</div>" +
       '<div class="face back" aria-hidden="' + !state.flipped + '">' +
-        '<div class="facehead"><span class="deck">' + esc(d.name) + '</span><span class="num">Answer</span></div>' +
-        '<div class="a">' + render(card.a) + "</div>" +
-        '<div class="hint">' + inline(qText(card.q)) + "</div>" +
+        '<div class="fhead">' + deckLabel(d, card.q) + tag + "</div>" +
+        '<div>' + qhtml(card.q, "qsmall") + "</div>" +
+        '<div class="ans">' + render(card.a) + "</div>" +
       "</div>" +
     "</div>" +
-    '<div class="controls" style="margin-top:16px">' +
-      '<button class="btn prev" id="prev" aria-label="Previous card"' + (state.pos === 0 ? " disabled" : "") + ">←</button>" +
+    '<div class="controls">' +
+      '<button class="btn prev" id="prev" aria-label="Previous card"' + (state.pos === 0 ? " disabled" : "") + '>Previous</button>' +
       '<button class="btn again" id="again">Review again</button>' +
       '<button class="btn good" id="good">I knew it</button>' +
-      '<button class="btn next" id="next" aria-label="Next card"' + (state.pos >= state.order.length - 1 ? " disabled" : "") + ">→</button>" +
+      '<button class="btn next" id="next" aria-label="Next card"' + (state.pos >= state.order.length - 1 ? " disabled" : "") + '>Next</button>' +
     "</div>" +
-    '<p class="keys"><kbd>Space</kbd> flip · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>1</kbd> review again · <kbd>2</kbd> I knew it</p>';
+    '<p class="keys"><span><kbd>Space</kbd> flip</span><span><kbd>←</kbd> <kbd>→</kbd> previous / next</span><span><kbd>1</kbd> review again</span><span><kbd>2</kbd> I knew it</span></p>';
   $("card").onclick = flip;
-  $("prev").onclick = () => go(-1);
-  $("next").onclick = () => go(1);
-  $("again").onclick = () => markCard(false);
-  $("good").onclick = () => markCard(true);
+  $("prev").onclick = () => go(-1); $("next").onclick = () => go(1);
+  $("again").onclick = () => markCard(false); $("good").onclick = () => markCard(true);
 }
-
 function drawList() {
   const list = $("list");
-  if (!state.order.length) { list.innerHTML = '<div class="empty"><h2>Nothing to show</h2><p>No cards match these filters.</p></div>'; return; }
+  if (!state.order.length) { list.innerHTML = emptyState(); wireEmpty(); return; }
   list.innerHTML = state.order.map(id => {
     const c = CARDS.find(x => x.id === id), d = deckById[c.deck], m = store.known[c.id];
-    const st = m === true ? '<b class="k">Known</b>' : m === false ? '<b class="x">Review again</b>' : "Not seen yet";
-    return '<article class="item" style="--c: ' + colorOf(d) + '"><div class="iq">' + inline(qText(c.q)) + '</div><div class="ia">' + render(c.a) + '</div><div class="state"><span>' + esc(d.name) + "</span>" + (isExamStyle(c.q) ? "<span>· Exam-style</span>" : "") + "<span>·</span>" + st + "</div></article>";
+    const st = m === true ? '<span class="k">Known</span>' : m === false ? '<span class="x">Review again</span>' : "<span>Not seen yet</span>";
+    return '<article class="item" style="--c: var(--c-' + d.id + ')"><div class="iq">' + qhtml(c.q, "iqs") + '</div><div class="ia">' + render(c.a) + '</div><div class="imeta"><span class="deck">' + esc(d.name) + "</span>" + (isExam(c.q) ? "<span>Exam-style</span>" : "") + st + "</div></article>";
   }).join("");
 }
-
 function draw() {
-  $("study").hidden = state.view !== "study";
-  $("listview").hidden = state.view !== "list";
-  if (state.view === "study") drawStudy(); else drawList();
+  $("study").hidden = state.view !== "study"; $("listview").hidden = state.view !== "list";
+  state.view === "study" ? drawStudy() : drawList();
   drawProgress();
 }
 function flip() {
-  state.flipped = !state.flipped;
   const el = $("card"); if (!el) return;
+  state.flipped = !state.flipped;
   el.classList.toggle("flipped", state.flipped);
   el.querySelector(".front").setAttribute("aria-hidden", String(state.flipped));
   el.querySelector(".back").setAttribute("aria-hidden", String(!state.flipped));
@@ -679,7 +922,7 @@ function go(step) {
 }
 function markCard(known) {
   const id = state.order[state.pos]; if (!id) return;
-  store.known[id] = known; save();
+  store.known[id] = known; save(); drawDecks();
   if (state.missedOnly && known) {
     state.order.splice(state.pos, 1);
     if (state.pos >= state.order.length) state.pos = Math.max(0, state.order.length - 1);
@@ -687,27 +930,40 @@ function markCard(known) {
   } else if (state.pos < state.order.length - 1) go(1);
   else draw();
 }
+function syncView() {
+  $("v-study").setAttribute("aria-pressed", String(state.view === "study"));
+  $("v-list").setAttribute("aria-pressed", String(state.view === "list"));
+}
 
-$("v-study").onclick = () => { state.view = "study"; $("v-study").setAttribute("aria-pressed", "true"); $("v-list").setAttribute("aria-pressed", "false"); draw(); };
-$("v-list").onclick = () => { state.view = "list"; $("v-list").setAttribute("aria-pressed", "true"); $("v-study").setAttribute("aria-pressed", "false"); draw(); };
+$("v-study").onclick = () => { state.view = "study"; syncView(); draw(); };
+$("v-list").onclick = () => { state.view = "list"; syncView(); draw(); };
 $("shuffle").onclick = () => { state.shuffle = !state.shuffle; $("shuffle").setAttribute("aria-pressed", String(state.shuffle)); rebuild(false); };
 $("missed").onclick = () => { state.missedOnly = !state.missedOnly; $("missed").setAttribute("aria-pressed", String(state.missedOnly)); rebuild(false); };
+$("all").onclick = () => setDecks([]);
+$("none").onclick = () => { state.decks = new Set(); store.decks = []; save(); drawDecks(); rebuild(false); };
 $("reset").onclick = function () {
-  if (this.dataset.armed) { store.known = {}; save(); delete this.dataset.armed; this.textContent = "Reset my progress"; rebuild(false); return; }
-  this.dataset.armed = "1"; this.textContent = "Click again to clear all marks";
+  if (this.dataset.armed) { store.known = {}; save(); delete this.dataset.armed; this.textContent = "Reset my progress"; drawDecks(); rebuild(false); return; }
+  this.dataset.armed = "1"; this.textContent = "Click again to clear all progress";
   setTimeout(() => { if (this.dataset.armed) { delete this.dataset.armed; this.textContent = "Reset my progress"; } }, 4000);
 };
 document.addEventListener("keydown", e => {
   if (state.view !== "study" || e.metaKey || e.ctrlKey || e.altKey) return;
   const t = e.target;
-  if (t && t.tagName === "BUTTON" && t.id !== "card" && (e.key === " " || e.key === "Enter")) return;
+  if (t && t.closest && (t.closest("button:not(#card)") || t.closest(".brow") || t.id === "dtoggle") && (e.key === " " || e.key === "Enter")) return;
   if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); }
   else if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
   else if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
   else if (e.key === "1") markCard(false);
   else if (e.key === "2") markCard(true);
 });
+$("dtoggle").onclick = () => {
+  const open = $("decksbox").classList.toggle("open");
+  $("dtoggle").setAttribute("aria-expanded", String(open));
+  $("dtact").textContent = open ? "Done" : "Choose decks";
+};
 
-drawChips();
+drawDecks();
 rebuild(false);
 </script>
+</body>
+</html>
